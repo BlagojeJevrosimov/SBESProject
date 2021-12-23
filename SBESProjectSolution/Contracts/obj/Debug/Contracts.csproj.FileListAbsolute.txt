@@ -1,0 +1,5 @@
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\Contracts\bin\Debug\Contracts.dll
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\Contracts\bin\Debug\Contracts.pdb
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\Contracts\obj\Debug\Contracts.csproj.CoreCompileInputs.cache
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\Contracts\obj\Debug\Contracts.dll
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\Contracts\obj\Debug\Contracts.pdb
