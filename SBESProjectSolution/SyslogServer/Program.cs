@@ -23,6 +23,8 @@ namespace SyslogServer
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
             binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
 
+            Console.WriteLine("Korisnik koji je pokrenuo server je : " + WindowsIdentity.GetCurrent().Name);
+
             ServiceHost host = new ServiceHost(typeof(SyslogServer));
             host.AddServiceEndpoint(typeof(ISyslogServer), binding, address);
 
