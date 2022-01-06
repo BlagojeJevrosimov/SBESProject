@@ -3,3 +3,9 @@ C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\Contracts\bin\Debug
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\Contracts\obj\Debug\Contracts.csproj.CoreCompileInputs.cache
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\Contracts\obj\Debug\Contracts.dll
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\Contracts\obj\Debug\Contracts.pdb
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\Contracts\bin\Debug\Contracts.dll
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\Contracts\bin\Debug\Contracts.pdb
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\Contracts\obj\Debug\Contracts.csproj.AssemblyReference.cache
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\Contracts\obj\Debug\Contracts.csproj.CoreCompileInputs.cache
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\Contracts\obj\Debug\Contracts.dll
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\Contracts\obj\Debug\Contracts.pdb

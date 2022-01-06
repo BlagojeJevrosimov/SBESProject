@@ -26,7 +26,9 @@ namespace ConsumerClient
 
             using (ConsumerClient proxy = new ConsumerClient(binding, endpointAddress))
             {
-               
+                // proxy.Read();
+                //proxy.Update();
+                //proxy.Delete();
             }
 
             Console.ReadLine();

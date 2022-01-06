@@ -11,6 +11,6 @@ namespace SyslogServer
     {
         internal static Dictionary<string, Consumer> subscribers = new Dictionary<string, Consumer>();
 
-        
+        internal static Dictionary<int, Event> events = new Dictionary<int, Event>();
     }
 }

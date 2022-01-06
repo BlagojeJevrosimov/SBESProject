@@ -26,6 +26,7 @@ namespace ConsumerClient
                 Console.WriteLine("Error while trying to Subscribe : {0}", e.Message);
             }
         }
+
         #region Read()
 
         public string Read()
