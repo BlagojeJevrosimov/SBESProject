@@ -38,8 +38,19 @@ namespace SecurityManager
                 return false;
             }
 
-            evaluationContext.Properties["Principal"] =
-                new CustomPrincipal((WindowsIdentity)identities[0]);
+            // ne proverava se autentifikacija jer se to radi u login metodi ?
+            //WindowsIdentity windowsIdentity = identities[0] as WindowsIdentity;
+
+            //try
+            //{
+            //    Audit.AuthenticationSuccess(Formatter.ParseName(windowsIdentity.Name));
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
+
+            evaluationContext.Properties["Principal"] = new CustomPrincipal((WindowsIdentity)identities[0]);
             return true;
         }
     }

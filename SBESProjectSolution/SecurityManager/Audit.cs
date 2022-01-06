@@ -9,9 +9,9 @@ namespace SecurityManager
 {
    public class Audit : IDisposable
     {
-        private static EventLog customLog = null;
+        private static EventLog customLog = null;           // u konstruktoru kreiramo objekat
         const string SourceName = "SecurityManager.Audit";
-        const string LogName = "MySecTest";
+        const string LogName = "ProjectSecurityTest";       // mozemo bilo koji naziv
 
         static Audit()
         {
@@ -21,8 +21,7 @@ namespace SecurityManager
                 {
                     EventLog.CreateEventSource(SourceName, LogName);
                 }
-                customLog = new EventLog(LogName,
-                    Environment.MachineName, SourceName);
+                customLog = new EventLog(LogName, Environment.MachineName, SourceName);
             }
             catch (Exception e)
             {
@@ -34,15 +33,12 @@ namespace SecurityManager
 
         public static void AuthenticationSuccess(string userName)
         {
-            //TO DO
 
             if (customLog != null)
             {
-                string UserAuthenticationSuccess =
-                    AuditEvents.AuthenticationSuccess;
-                string message = String.Format(UserAuthenticationSuccess,
-                    userName);
-                customLog.WriteEntry(message);
+                string UserAuthenticationSuccess = AuditEvents.AuthenticationSuccess;   // preuzimanje poruke
+                string message = String.Format(UserAuthenticationSuccess, userName);    // ubacivanje username-a u poruku
+                customLog.WriteEntry(message);                                          // upisivanje poruke u log
             }
             else
             {
@@ -53,13 +49,11 @@ namespace SecurityManager
 
         public static void AuthorizationSuccess(string userName, string serviceName)
         {
-            //TO DO
+            
             if (customLog != null)
             {
-                string AuthorizationSuccess =
-                    AuditEvents.AuthorizationSuccess;
-                string message = String.Format(AuthorizationSuccess,
-                    userName, serviceName);
+                string AuthorizationSuccess = AuditEvents.AuthorizationSuccess;
+                string message = String.Format(AuthorizationSuccess, userName, serviceName);    // prosledjujemo i naziv metode
                 customLog.WriteEntry(message);
             }
             else
@@ -79,10 +73,8 @@ namespace SecurityManager
         {
             if (customLog != null)
             {
-                string AuthorizationFailed =
-                    AuditEvents.AuthorizationFailed;
-                string message = String.Format(AuthorizationFailed,
-                    userName, serviceName, reason);
+                string AuthorizationFailed = AuditEvents.AuthorizationFailed;
+                string message = String.Format(AuthorizationFailed, userName, serviceName, reason);
                 customLog.WriteEntry(message);
             }
             else

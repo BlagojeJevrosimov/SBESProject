@@ -13,6 +13,7 @@ namespace SyslogServer
     public class SyslogServer : ISyslogServer
     {
         public static Dictionary<string, Consumer> UserAccountsDB = new Dictionary<string, Consumer>();
+
         public void Login(string username, string password)
         {
             if (!UserAccountsDB.ContainsKey(username))
@@ -30,7 +31,7 @@ namespace SyslogServer
 
             WindowsIdentity windowsIdentity = identity as WindowsIdentity;
 
-            Console.WriteLine("Ime klijenta koji je pozvao metodu : " + windowsIdentity.Name);
+            Console.WriteLine("Ime klijenta koji je pozvao metodu login : " + windowsIdentity.Name);
            // Console.WriteLine("Jedinstveni identifikator : " + windowsIdentity.User);
 
            /* Console.WriteLine("Grupe korisnika:");
@@ -41,6 +42,7 @@ namespace SyslogServer
                 Console.WriteLine(name);
             }*/
         }
+
         public void Subscribe() 
         {
             WindowsIdentity windowsIdentity = Thread.CurrentPrincipal.Identity as WindowsIdentity;
@@ -54,62 +56,215 @@ namespace SyslogServer
                 string message = String.Format("User {0} is already subscribed (time : {1}).", name, time.TimeOfDay);
                 throw new FaultException<SecurityException>(new SecurityException(message));
             }
-
-
         }
-        [PrincipalPermission(SecurityAction.Demand, Role = "Delete")]
+
+        //[PrincipalPermission(SecurityAction.Demand, Role = "Delete")]
         public bool Delete()
         {
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            string userName = Formatter.ParseName(principal.Identity.Name);
 
-            string name = Thread.CurrentPrincipal.Identity.Name;
-            DateTime time = DateTime.Now;
-            string message = String.Format("Access is denied. User {0} try to call Delete method (time : {1}). " +
-                "For this method need to be member of group Admin.", name, time.TimeOfDay);
-            throw new FaultException<SecurityException>(new SecurityException(message));
+            if (Thread.CurrentPrincipal.IsInRole("Delete"))
+            {
+                Console.WriteLine("Delete successfully executed.");
 
+                try
+                {
+                    Audit.AuthorizationSuccess(userName,
+                        OperationContext.Current.IncomingMessageHeaders.Action);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                return true;
+            }
+            else
+            {
+                try
+                {
+                    Audit.AuthorizationFailed(userName,
+                        OperationContext.Current.IncomingMessageHeaders.Action, "Delete method need Delete permission.");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                throw new FaultException("User " + userName +
+                    " try to call Delete method. Delete method need Delete permission.");
+            }
         }
-        [PrincipalPermission(SecurityAction.Demand, Role = "Administrate")]
+
+        //[PrincipalPermission(SecurityAction.Demand, Role = "Administrate")]
         public void ManagePermission(bool isAdd, string rolename, params string[] permissions)
         {
-            if (isAdd) // u pitanju je dodavanje
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            string userName = Formatter.ParseName(principal.Identity.Name);
+
+            if (Thread.CurrentPrincipal.IsInRole("Administrate"))     // provera da li korisnik ima odgovarajucu permisiju
             {
-                RolesConfig.AddPermissions(rolename, permissions);
+                Console.WriteLine("ManagePermission successfully executed.");
+
+                try
+                {
+                    Audit.AuthorizationSuccess(userName,
+                        OperationContext.Current.IncomingMessageHeaders.Action);
+
+                    if (isAdd) // u pitanju je dodavanje
+                    {
+                        RolesConfig.AddPermissions(rolename, permissions);
+                    }
+                    else // u pitanju je brisanje
+                    {
+                        RolesConfig.RemovePermissions(rolename, permissions);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
-            else // u pitanju je brisanje
+            else
             {
-                RolesConfig.RemovePermissions(rolename, permissions);
+                try
+                {
+                    Audit.AuthorizationFailed(userName,
+                        OperationContext.Current.IncomingMessageHeaders.Action, "ManagePermission method needs Administrate permission.");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                throw new FaultException("User " + userName +
+                    " tried to call ManagePermission method. ManagePermission method needs Administrate permission.");
             }
         }
 
-        [PrincipalPermission(SecurityAction.Demand, Role = "Administrate")]
+        //[PrincipalPermission(SecurityAction.Demand, Role = "Administrate")]
         public void ManageRoles(bool isAdd, string rolename)
         {
-            if (isAdd) // u pitanju je dodavanje
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            string userName = Formatter.ParseName(principal.Identity.Name);
+
+            if (Thread.CurrentPrincipal.IsInRole("Administrate"))     // provera da li korisnik ima odgovarajucu permisiju
             {
-                RolesConfig.AddRole(rolename);
+                Console.WriteLine("ManageRoles successfully executed.");
+
+                try
+                {
+                    Audit.AuthorizationSuccess(userName,
+                        OperationContext.Current.IncomingMessageHeaders.Action);
+
+                    if (isAdd) // u pitanju je dodavanje
+                    {
+                        RolesConfig.AddRole(rolename);
+                    }
+                    else // u pitanju je brisanje
+                    {
+                        RolesConfig.RemoveRole(rolename);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
             }
-            else // u pitanju je brisanje
+            else
             {
-                RolesConfig.RemoveRole(rolename);
+                try
+                {
+                    Audit.AuthorizationFailed(userName,
+                        OperationContext.Current.IncomingMessageHeaders.Action, "ManageRoles method needs Administrate permission.");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                throw new FaultException("User " + userName +
+                    " tried to call ManageRoles method. ManageRoles method needs Administrate permission.");
             }
         }
 
-        [PrincipalPermission(SecurityAction.Demand, Role = "Modify")]
+        //[PrincipalPermission(SecurityAction.Demand, Role = "Update")]
         public bool Update()
         {
-       
-            return false;
-            
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            string userName = Formatter.ParseName(principal.Identity.Name);
 
+            if (Thread.CurrentPrincipal.IsInRole("Update"))     // provera da li korisnik ima odgovarajucu permisiju
+            {
+                Console.WriteLine("Update successfully executed.");
+
+                try
+                {
+                    Audit.AuthorizationSuccess(userName,
+                        OperationContext.Current.IncomingMessageHeaders.Action);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                return true;
+            }
+            else
+            {
+                try
+                {
+                    Audit.AuthorizationFailed(userName,
+                        OperationContext.Current.IncomingMessageHeaders.Action, "Update method needs Update permission.");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                throw new FaultException("User " + userName +
+                    " tried to call Update method. Update method needs Update permission.");
+            }
         }
 
-
+        //[PrincipalPermission(SecurityAction.Demand, Role = "Read")]
         public string Read()
         {
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            string userName = Formatter.ParseName(principal.Identity.Name);
 
-            return null;
+            if (Thread.CurrentPrincipal.IsInRole("Update"))
+            {
+                try
+                {
+                    // logujemo uspesnu autorizaciju
+                    Audit.AuthorizationSuccess(userName,
+                        OperationContext.Current.IncomingMessageHeaders.Action);    // naziv servisa
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            else
+            {
+                try
+                {
+                    Audit.AuthorizationFailed(userName,
+                        OperationContext.Current.IncomingMessageHeaders.Action, "Read method needs Read permission.");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                throw new FaultException("User " + userName +
+                    " tried to call Read method. Read method needs Read permission.");
+            }
             
-
+            return null;
         }
     }
  }
