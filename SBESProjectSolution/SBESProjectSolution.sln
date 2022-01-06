@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyslogServer", "SyslogServe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityManager", "SecurityManager\SecurityManager.csproj", "{A8367A4A-48FC-4E73-B23F-6E8B24DAAF5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationFirewall", "ApplicationFirewall\ApplicationFirewall.csproj", "{B152BF26-8FC8-4046-B2EA-B9E741D2CAAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A8367A4A-48FC-4E73-B23F-6E8B24DAAF5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8367A4A-48FC-4E73-B23F-6E8B24DAAF5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8367A4A-48FC-4E73-B23F-6E8B24DAAF5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B152BF26-8FC8-4046-B2EA-B9E741D2CAAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B152BF26-8FC8-4046-B2EA-B9E741D2CAAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B152BF26-8FC8-4046-B2EA-B9E741D2CAAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B152BF26-8FC8-4046-B2EA-B9E741D2CAAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

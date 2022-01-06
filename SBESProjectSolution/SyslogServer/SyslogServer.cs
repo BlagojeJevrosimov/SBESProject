@@ -232,38 +232,23 @@ namespace SyslogServer
         //[PrincipalPermission(SecurityAction.Demand, Role = "Read")]
         public string Read()
         {
+            // Posto se read proverava u CheckAccessCore metodi, autorizacija je uspesna, ne moramo proveravati
+            Console.WriteLine("Read successfully executed.");
+
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             string userName = Formatter.ParseName(principal.Identity.Name);
 
-            if (Thread.CurrentPrincipal.IsInRole("Update"))
+            try
             {
-                try
-                {
-                    // logujemo uspesnu autorizaciju
-                    Audit.AuthorizationSuccess(userName,
-                        OperationContext.Current.IncomingMessageHeaders.Action);    // naziv servisa
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                // logujemo uspesnu autorizaciju
+                Audit.AuthorizationSuccess(userName,
+                    OperationContext.Current.IncomingMessageHeaders.Action);    // naziv servisa
             }
-            else
+            catch (Exception e)
             {
-                try
-                {
-                    Audit.AuthorizationFailed(userName,
-                        OperationContext.Current.IncomingMessageHeaders.Action, "Read method needs Read permission.");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                Console.WriteLine(e.Message);
+            }
 
-                throw new FaultException("User " + userName +
-                    " tried to call Read method. Read method needs Read permission.");
-            }
-            
             return null;
         }
     }

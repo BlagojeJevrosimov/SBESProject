@@ -6,20 +6,74 @@ using System.Threading.Tasks;
 
 namespace Contracts
 {
+    public enum CriticallityLevel { GREEN_ALERT, YELLOW_ALERT, RED_ALERT }
+    public enum MessageState { OPEN, CLOSE }
+
     public class Event
     {
+        CriticallityLevel criticallity;
+        DateTime timestamp;
+        Consumer source;
+        string message;
+        MessageState state;
 
-        string log = null;
-
-        public string Log 
+        public CriticallityLevel Criticallity 
         {
             get
             {
-                return log;
+                return criticallity;
             }
             set
             {
-                log = value;
+                criticallity = value;
+            } 
+        }
+
+        public DateTime Timestamp
+        {
+            get
+            {
+                return timestamp;
+            }
+            set
+            {
+                timestamp = value;
+            }
+        }
+
+        public Consumer Source
+        {
+            get
+            {
+                return source;
+            }
+            set
+            {
+                source = value;
+            }
+        }
+
+        public string Message
+        {
+            get
+            {
+                return message;
+            }
+            set
+            {
+                message = value;
+            }
+        }
+
+        public MessageState State
+        {
+            get
+            {
+                return state;
+            }
+            set
+            {
+                state = value;
             }
         }
     }

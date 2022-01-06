@@ -13,8 +13,24 @@ namespace SecurityManager
         {
             CustomPrincipal principal = operationContext.ServiceSecurityContext.
                  AuthorizationContext.Properties["Principal"] as CustomPrincipal;
-            return principal.IsInRole("Read");
-            // ne treba nam da je obavezan read
+
+            bool retValue = principal.IsInRole("Read");
+
+            if (!retValue)
+            {
+                try
+                {
+                    Audit.AuthorizationFailed(Formatter.ParseName(principal.Identity.Name),
+                        OperationContext.Current.IncomingMessageHeaders.Action, "Need Read permission.");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            return retValue;
+
         }
     }
 }
