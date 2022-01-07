@@ -12,36 +12,6 @@ namespace SyslogServer
 {
     public class SyslogServer : ISyslogServer
     {
-        public static Dictionary<string, Consumer> UserAccountsDB = new Dictionary<string, Consumer>();
-
-        public void Login(string username, string password)
-        {
-            if (!UserAccountsDB.ContainsKey(username))
-            {
-                UserAccountsDB.Add(username, new Consumer(username, password));
-            }
-            else
-            {
-                Console.WriteLine($"Korisnik sa korisnickim imenom {username} vec postoji u bazi");
-            }
-
-            IIdentity identity = Thread.CurrentPrincipal.Identity;
-
-           // Console.WriteLine("Tip autentifikacije : " + identity.AuthenticationType);
-
-            WindowsIdentity windowsIdentity = identity as WindowsIdentity;
-
-            Console.WriteLine("Ime klijenta koji je pozvao metodu login : " + windowsIdentity.Name);
-           // Console.WriteLine("Jedinstveni identifikator : " + windowsIdentity.User);
-
-           /* Console.WriteLine("Grupe korisnika:");
-            foreach (IdentityReference group in windowsIdentity.Groups)
-            {
-                SecurityIdentifier sid = (SecurityIdentifier)group.Translate(typeof(SecurityIdentifier));
-                string name = (sid.Translate(typeof(NTAccount))).ToString();
-                Console.WriteLine(name);
-            }*/
-        }
 
         public void Subscribe() 
         {
