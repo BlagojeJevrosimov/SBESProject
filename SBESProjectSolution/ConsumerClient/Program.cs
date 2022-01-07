@@ -26,12 +26,33 @@ namespace ConsumerClient
 
             using (ConsumerClient proxy = new ConsumerClient(binding, endpointAddress))
             {
-                // proxy.Read();
-                //proxy.Update();
-                //proxy.Delete();
+                proxy.Subscribe();
+
+                while (true)
+                {
+                    PrintMenu();
+                    string x = Console.ReadLine();
+
+                    switch (x)
+                    {
+                        case "1":
+                            //proxy.Read();
+                            break;
+                        case "2":
+                            //proxy.Update();
+                            break;
+                        case "3":
+                            //proxy.Delete();
+                            break;
+                    }
+                }
             }
 
-            Console.ReadLine();
+        }
+
+        static void PrintMenu()
+        { 
+            // ...
         }
     }
 }

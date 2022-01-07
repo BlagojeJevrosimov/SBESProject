@@ -18,6 +18,15 @@ namespace Contracts
         string message;
         MessageState state;
 
+        public Event(int key, CriticallityLevel criticallity, DateTime timestamp, Consumer source, string message, MessageState state)
+        {
+            this.key = key;
+            this.timestamp = timestamp;
+            this.source = source;
+            this.message = message;
+            this.state = state;
+        }
+
         public int Key 
         {
             get 

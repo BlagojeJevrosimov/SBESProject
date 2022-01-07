@@ -18,7 +18,9 @@ namespace SyslogServer
             WindowsIdentity windowsIdentity = Thread.CurrentPrincipal.Identity as WindowsIdentity;
             if (!Database.subscribers.ContainsKey(windowsIdentity.Name))
             {
-                Database.subscribers[windowsIdentity.User.ToString()] = new Consumer(windowsIdentity.Name, windowsIdentity.User.ToString());
+                Database.subscribers[windowsIdentity.User.ToString()] = 
+                    new Consumer(windowsIdentity.Name, windowsIdentity.User.ToString());
+                                                        // security identifier
             }
             else {
                 string name = Thread.CurrentPrincipal.Identity.Name;

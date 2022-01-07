@@ -8,6 +8,7 @@ using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SyslogServer
@@ -15,6 +16,14 @@ namespace SyslogServer
     class Program
     {
         static void Main(string[] args)
+        { 
+            Thread t1 = new Thread(new ThreadStart(Program.ConsumerCommunication));
+            t1.Start();
+
+
+        }
+
+        static void ConsumerCommunication()
         {
             NetTcpBinding binding = new NetTcpBinding();
             string address = "net.tcp://localhost:9999/SyslogServer";
@@ -51,5 +60,6 @@ namespace SyslogServer
 
             host.Close();
         }
+
     }
 }
