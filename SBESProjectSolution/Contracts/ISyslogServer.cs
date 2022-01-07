@@ -13,11 +13,11 @@ namespace Contracts
         [OperationContract]
         void Subscribe();
         [OperationContract]
-        string Read();  // traziti po kljucu, vraca objekat
+        Event Read(int key);  // traziti po kljucu, vraca objekat
         [OperationContract]
-        bool Update();  // prosledjujemo kljuc i izmenjen objekat
+        bool Update(Event ev);  // prosledjujemo kljuc i izmenjen objekat
         [OperationContract]
-        bool Delete();  // prosledjujemo kljuc
+        bool Delete(int key);  // prosledjujemo kljuc
         [OperationContract]
         void ManagePermission(bool isAdd, string rolename, params string[] permissions);
         [OperationContract]

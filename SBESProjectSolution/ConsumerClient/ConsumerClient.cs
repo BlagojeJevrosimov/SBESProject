@@ -29,18 +29,19 @@ namespace ConsumerClient
 
         #region Read()
 
-        public string Read()
+        public Event Read(int key)
         {
+            Event ret = null;
             try
             {
-                Console.WriteLine(factory.Read());
+                Console.WriteLine(factory.Read(key));
                 Console.WriteLine("Read allowed");
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error while trying to Read : {0}", e.Message);
             }
-            return "";
+            return ret;
 
         }
 
@@ -48,12 +49,12 @@ namespace ConsumerClient
 
         #region Modify()
 
-        public bool Update()
+        public bool Update(Event ev)
         {
             bool retValue = false;
             try
             {
-                retValue = factory.Update();
+                retValue = factory.Update(ev);
                 Console.WriteLine("Update allowed");
             }
             catch(Exception e)
@@ -67,12 +68,12 @@ namespace ConsumerClient
         #endregion
 
         #region Delete()
-        public bool Delete()
+        public bool Delete(int key)
         {
             bool retValue = false;
             try
             {
-                retValue = factory.Delete();
+                retValue = factory.Delete(key);
                 Console.WriteLine("Delete allowed");
             }
             catch (Exception e)

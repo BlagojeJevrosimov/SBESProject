@@ -11,11 +11,24 @@ namespace Contracts
 
     public class Event
     {
+        int key;
         CriticallityLevel criticallity;
         DateTime timestamp;
         Consumer source;
         string message;
         MessageState state;
+
+        public int Key 
+        {
+            get 
+            {
+                return key;
+            }
+            set
+            {
+                key = value;
+            }
+        }
 
         public CriticallityLevel Criticallity 
         {
@@ -75,6 +88,15 @@ namespace Contracts
             {
                 state = value;
             }
+        }
+
+        public void Update(Event newEv)
+        {
+            this.Criticallity = newEv.Criticallity;
+            this.Timestamp = newEv.Timestamp;
+            this.Source = newEv.Source;
+            this.Message = newEv.Message;
+            this.State = newEv.State;
         }
     }
 }

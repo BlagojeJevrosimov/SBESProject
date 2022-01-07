@@ -29,7 +29,7 @@ namespace SyslogServer
         }
 
         //[PrincipalPermission(SecurityAction.Demand, Role = "Delete")]
-        public bool Delete()
+        public bool Delete(int key)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             string userName = Formatter.ParseName(principal.Identity.Name);
@@ -42,13 +42,14 @@ namespace SyslogServer
                 {
                     Audit.AuthorizationSuccess(userName,
                         OperationContext.Current.IncomingMessageHeaders.Action);
+                    return Database.events.Remove(key);
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
 
-                return true;
+                return false;
             }
             else
             {
@@ -161,7 +162,7 @@ namespace SyslogServer
         }
 
         //[PrincipalPermission(SecurityAction.Demand, Role = "Update")]
-        public bool Update()
+        public bool Update(Event ev)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             string userName = Formatter.ParseName(principal.Identity.Name);
@@ -174,13 +175,17 @@ namespace SyslogServer
                 {
                     Audit.AuthorizationSuccess(userName,
                         OperationContext.Current.IncomingMessageHeaders.Action);
+                    if (Database.events.ContainsKey(ev.Key))
+                    {
+                        Event oldEv = Database.events[ev.Key];
+                        oldEv.Update(ev);
+                    }
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
-
-                return true;
+                return false;
             }
             else
             {
@@ -200,7 +205,7 @@ namespace SyslogServer
         }
 
         //[PrincipalPermission(SecurityAction.Demand, Role = "Read")]
-        public string Read()
+        public Event Read(int key)
         {
             // Posto se read proverava u CheckAccessCore metodi, autorizacija je uspesna, ne moramo proveravati
             Console.WriteLine("Read successfully executed.");
@@ -213,6 +218,10 @@ namespace SyslogServer
                 // logujemo uspesnu autorizaciju
                 Audit.AuthorizationSuccess(userName,
                     OperationContext.Current.IncomingMessageHeaders.Action);    // naziv servisa
+                if (Database.events.ContainsKey(key))
+                {
+                    return Database.events[key];
+                }
             }
             catch (Exception e)
             {
