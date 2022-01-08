@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Contracts
 {
-    public enum CriticallityLevel { GREEN_ALERT, YELLOW_ALERT, RED_ALERT }
-    public enum MessageState { OPEN, CLOSE }
+    [DataContract]
+    public enum CriticallityLevel { [EnumMember] GREEN_ALERT, [EnumMember] YELLOW_ALERT, [EnumMember] RED_ALERT }
+    [DataContract]
+    public enum MessageState { [EnumMember] OPEN, [EnumMember] CLOSE }
 
+    [DataContract]
     public class Event
     {
         int key;
@@ -27,6 +31,7 @@ namespace Contracts
             this.state = state;
         }
 
+        [DataMember]
         public int Key 
         {
             get 
@@ -39,6 +44,7 @@ namespace Contracts
             }
         }
 
+        [DataMember]
         public CriticallityLevel Criticallity 
         {
             get
@@ -51,6 +57,7 @@ namespace Contracts
             } 
         }
 
+        [DataMember]
         public DateTime Timestamp
         {
             get
@@ -63,6 +70,7 @@ namespace Contracts
             }
         }
 
+        [DataMember]
         public Consumer Source
         {
             get
@@ -75,6 +83,7 @@ namespace Contracts
             }
         }
 
+        [DataMember]
         public string Message
         {
             get
@@ -87,6 +96,7 @@ namespace Contracts
             }
         }
 
+        [DataMember]
         public MessageState State
         {
             get

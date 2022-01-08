@@ -12,15 +12,21 @@ namespace SyslogServer
 {
     public class SyslogServer : ISyslogServer
     {
-
+        [PrincipalPermission(SecurityAction.Demand, Role = "Read")]
         public void Subscribe() 
         {
             WindowsIdentity windowsIdentity = Thread.CurrentPrincipal.Identity as WindowsIdentity;
+
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            string userName = Formatter.ParseName(principal.Identity.Name);
+
             if (!Database.subscribers.ContainsKey(windowsIdentity.Name))
             {
                 Database.subscribers[windowsIdentity.User.ToString()] = 
                     new Consumer(windowsIdentity.Name, windowsIdentity.User.ToString());
                                                         // security identifier
+                Audit.AuthorizationSuccess(userName,
+                    OperationContext.Current.IncomingMessageHeaders.Action);
             }
             else {
                 string name = Thread.CurrentPrincipal.Identity.Name;
@@ -46,6 +52,10 @@ namespace SyslogServer
                         OperationContext.Current.IncomingMessageHeaders.Action);
                     return Database.events.Remove(key);
                 }
+                catch (FaultException<SecurityException> e)
+                {
+                    Console.WriteLine(e.Detail.Message);
+                }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
@@ -59,6 +69,10 @@ namespace SyslogServer
                 {
                     Audit.AuthorizationFailed(userName,
                         OperationContext.Current.IncomingMessageHeaders.Action, "Delete method need Delete permission.");
+                }
+                catch (FaultException<SecurityException> e)
+                {
+                    Console.WriteLine(e.Detail.Message);
                 }
                 catch (Exception e)
                 {
@@ -94,6 +108,10 @@ namespace SyslogServer
                         RolesConfig.RemovePermissions(rolename, permissions);
                     }
                 }
+                catch (FaultException<SecurityException> e)
+                {
+                    Console.WriteLine(e.Detail.Message);
+                }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
@@ -105,6 +123,10 @@ namespace SyslogServer
                 {
                     Audit.AuthorizationFailed(userName,
                         OperationContext.Current.IncomingMessageHeaders.Action, "ManagePermission method needs Administrate permission.");
+                }
+                catch (FaultException<SecurityException> e)
+                {
+                    Console.WriteLine(e.Detail.Message);
                 }
                 catch (Exception e)
                 {
@@ -140,6 +162,10 @@ namespace SyslogServer
                         RolesConfig.RemoveRole(rolename);
                     }
                 }
+                catch (FaultException<SecurityException> e)
+                {
+                    Console.WriteLine(e.Detail.Message);
+                }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
@@ -152,6 +178,10 @@ namespace SyslogServer
                 {
                     Audit.AuthorizationFailed(userName,
                         OperationContext.Current.IncomingMessageHeaders.Action, "ManageRoles method needs Administrate permission.");
+                }
+                catch (FaultException<SecurityException> e)
+                {
+                    Console.WriteLine(e.Detail.Message);
                 }
                 catch (Exception e)
                 {
@@ -183,6 +213,10 @@ namespace SyslogServer
                         oldEv.Update(ev);
                     }
                 }
+                catch (FaultException<SecurityException> e)
+                {
+                    Console.WriteLine(e.Detail.Message);
+                }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
@@ -195,6 +229,10 @@ namespace SyslogServer
                 {
                     Audit.AuthorizationFailed(userName,
                         OperationContext.Current.IncomingMessageHeaders.Action, "Update method needs Update permission.");
+                }
+                catch (FaultException<SecurityException> e)
+                {
+                    Console.WriteLine(e.Detail.Message);
                 }
                 catch (Exception e)
                 {
@@ -224,6 +262,10 @@ namespace SyslogServer
                 {
                     return Database.events[key];
                 }
+            }
+            catch (FaultException<SecurityException> e)
+            {
+                Console.WriteLine(e.Detail.Message);
             }
             catch (Exception e)
             {

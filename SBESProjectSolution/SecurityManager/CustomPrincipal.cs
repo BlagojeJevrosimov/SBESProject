@@ -22,15 +22,21 @@ namespace SecurityManager
 
         public bool IsInRole(string permission)
         {
-            foreach (IdentityReference group in this.identity.Groups)
+            foreach (IdentityReference group in this.identity.Groups)       // prolazimo kroz grupe korisnika
             {
+                // Preko SecurityIdentifier-a dolazimo do imena grupe
                 SecurityIdentifier sid = (SecurityIdentifier)group.Translate(typeof(SecurityIdentifier));
                 var name = sid.Translate(typeof(NTAccount));
                 string groupName = Formatter.ParseName(name.ToString());
+                
                 string[] permissions;
-                if (RolesConfig.GetPermissions(groupName, out permissions))
+                if (RolesConfig.GetPermissions(groupName, out permissions)) // preko grupa dolazimo do permisija
                 {
-                    return permissions.Contains(permission);
+                    foreach (string item in permissions)
+                    {
+                        if (item.Equals(permission))
+                            return true;
+                    }
                 }
             }
             return false;

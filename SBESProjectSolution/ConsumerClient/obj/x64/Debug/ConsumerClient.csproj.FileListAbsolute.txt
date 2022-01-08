@@ -1,0 +1,10 @@
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\bin\x64\Debug\ConsumerClient.exe.config
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\bin\x64\Debug\ConsumerClient.exe
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\bin\x64\Debug\ConsumerClient.pdb
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\bin\x64\Debug\Contracts.dll
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\bin\x64\Debug\Contracts.pdb
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\obj\x64\Debug\ConsumerClient.csproj.AssemblyReference.cache
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\obj\x64\Debug\ConsumerClient.csproj.CoreCompileInputs.cache
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\obj\x64\Debug\ConsumerClient.csproj.CopyComplete
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\obj\x64\Debug\ConsumerClient.exe
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\obj\x64\Debug\ConsumerClient.pdb

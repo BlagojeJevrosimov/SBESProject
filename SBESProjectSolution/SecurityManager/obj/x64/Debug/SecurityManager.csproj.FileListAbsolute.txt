@@ -1,0 +1,9 @@
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SecurityManager\bin\x64\Debug\SecurityManager.dll
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SecurityManager\bin\x64\Debug\SecurityManager.pdb
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.csproj.AssemblyReference.cache
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.AuditEventFile.resources
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.RolesConfigFile.resources
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.csproj.GenerateResource.cache
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.csproj.CoreCompileInputs.cache
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.dll
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.pdb

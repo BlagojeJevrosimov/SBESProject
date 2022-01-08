@@ -21,10 +21,10 @@ namespace ConsumerClient
 
             Console.WriteLine("Korisnik koji je pokrenuo klijenta je : " + WindowsIdentity.GetCurrent().Name);
 
-            EndpointAddress endpointAddress = new EndpointAddress(new Uri(address),
-                EndpointIdentity.CreateUpnIdentity("syslogServer"));
+            //EndpointAddress endpointAddress = new EndpointAddress(new Uri(address),
+            //    EndpointIdentity.CreateUpnIdentity("wcfServer"));
 
-            using (ConsumerClient proxy = new ConsumerClient(binding, endpointAddress))
+            using (ConsumerClient proxy = new ConsumerClient(binding, new EndpointAddress(new Uri(address))))
             {
                 proxy.Subscribe();
 
@@ -36,7 +36,7 @@ namespace ConsumerClient
                     switch (x)
                     {
                         case "1":
-                            //proxy.Read();
+                            proxy.Read(1);
                             break;
                         case "2":
                             //proxy.Update();
@@ -51,8 +51,11 @@ namespace ConsumerClient
         }
 
         static void PrintMenu()
-        { 
-            // ...
+        {
+            Console.WriteLine("Odaberite opciju:");
+            Console.WriteLine("1. Read");
+            Console.WriteLine("2. Update");
+            Console.WriteLine("3. Delete");
         }
     }
 }

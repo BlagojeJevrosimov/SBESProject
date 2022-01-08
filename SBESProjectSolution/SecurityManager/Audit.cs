@@ -86,7 +86,11 @@ namespace SecurityManager
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            if (customLog != null)
+            {
+                customLog.Dispose();
+                customLog = null;
+            }
         }
     }
 }
