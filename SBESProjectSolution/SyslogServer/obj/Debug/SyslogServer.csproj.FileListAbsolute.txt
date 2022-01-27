@@ -15,7 +15,7 @@ C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SyslogServer\bin\Debug\Cont
 C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SyslogServer\bin\Debug\SecurityManager.dll
 C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SyslogServer\bin\Debug\Contracts.pdb
 C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SyslogServer\bin\Debug\SecurityManager.pdb
-C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SyslogServer\obj\Debug\SyslogServer.csproj.AssemblyReference.cache
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SyslogServer\obj\Debug\SyslogServer.csprojAssemblyReference.cache
 C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SyslogServer\obj\Debug\SyslogServer.csproj.CoreCompileInputs.cache
 C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SyslogServer\obj\Debug\SyslogServer.csproj.CopyComplete
 C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\SyslogServer\obj\Debug\SyslogServer.exe

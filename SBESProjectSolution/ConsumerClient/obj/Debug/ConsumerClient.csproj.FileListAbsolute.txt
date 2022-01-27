@@ -13,7 +13,7 @@ C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\bin\Debug\Co
 C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\bin\Debug\ConsumerClient.pdb
 C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\bin\Debug\Contracts.dll
 C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\bin\Debug\Contracts.pdb
-C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\obj\Debug\ConsumerClient.csproj.AssemblyReference.cache
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\obj\Debug\ConsumerClient.csprojAssemblyReference.cache
 C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\obj\Debug\ConsumerClient.csproj.CoreCompileInputs.cache
 C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\obj\Debug\ConsumerClient.csproj.CopyComplete
 C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ConsumerClient\obj\Debug\ConsumerClient.exe

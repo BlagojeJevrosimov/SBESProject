@@ -36,11 +36,11 @@ namespace Contracts
         {
             get 
             {
-                return key;
+                return this.key;
             }
             set
             {
-                key = value;
+                this.key = value;
             }
         }
 
@@ -49,11 +49,11 @@ namespace Contracts
         {
             get
             {
-                return criticallity;
+                return this.criticallity;
             }
             set
             {
-                criticallity = value;
+                this.criticallity = value;
             } 
         }
 
@@ -62,11 +62,11 @@ namespace Contracts
         {
             get
             {
-                return timestamp;
+                return this.timestamp;
             }
             set
             {
-                timestamp = value;
+                this.timestamp = value;
             }
         }
 
@@ -75,11 +75,11 @@ namespace Contracts
         {
             get
             {
-                return source;
+                return this.source;
             }
             set
             {
-                source = value;
+                this.source = value;
             }
         }
 
@@ -88,11 +88,11 @@ namespace Contracts
         {
             get
             {
-                return message;
+                return this.message;
             }
             set
             {
-                message = value;
+                this.message = value;
             }
         }
 
@@ -101,11 +101,11 @@ namespace Contracts
         {
             get
             {
-                return state;
+                return this.state;
             }
             set
             {
-                state = value;
+                this.state = value;
             }
         }
 
@@ -116,6 +116,12 @@ namespace Contracts
             this.Source = newEv.Source;
             this.Message = newEv.Message;
             this.State = newEv.State;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("\tCriticallity: {0}\n\tTimestamp: {1}\n\tSource: {2}\tMessage: {3}\n\tState: {4}",
+                criticallity.ToString(), timestamp.ToString(), Source.ToString(), message, state.ToString());
         }
     }
 }

@@ -30,12 +30,12 @@ namespace Contracts
 		public string Id
 		{
 			get { return id; }
-			set { Id = value; }
+			set { id = value; }
 		}
 
         public override string ToString()
         {
-            return string.Format("Username: {0}, id: {1}", Username, Id); ;
+            return string.Format("username - {0}, id - {1}\n", Username, Id); ;
         }
     }
 }

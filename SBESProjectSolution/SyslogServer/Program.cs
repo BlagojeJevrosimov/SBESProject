@@ -17,18 +17,6 @@ namespace SyslogServer
     {
         static void Main(string[] args)
         {
-            Consumer c = new Consumer("natasa", "1");
-            Event ev = new Event(1, CriticallityLevel.GREEN_ALERT, DateTime.Now, c, "poruka", MessageState.OPEN);
-            Database.events.Add(ev.Key, ev);
-
-            Thread t1 = new Thread(new ThreadStart(Program.ConsumerCommunication));
-            t1.Start();
-
-
-        }
-
-        static void ConsumerCommunication()
-        {
             NetTcpBinding binding = new NetTcpBinding();
             string address = "net.tcp://localhost:9999/SyslogServer";
 
@@ -45,7 +33,7 @@ namespace SyslogServer
             host.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
 
             host.Authorization.ServiceAuthorizationManager = new CustomAuthorizationManager();
-            
+
             host.Authorization.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
             List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>();
             policies.Add(new CustomAuthorizationPolicy());
@@ -63,7 +51,7 @@ namespace SyslogServer
             Console.ReadLine();
 
             host.Close();
-        }
 
+        }
     }
 }

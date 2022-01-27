@@ -38,7 +38,8 @@ namespace ConsumerClient
             Event ret = null;
             try
             {
-                Console.WriteLine(factory.Read(key));
+                Event ev = factory.Read(key);
+                Console.WriteLine(ev);
                 Console.WriteLine("Read allowed");
             }
             catch (FaultException<SecurityException> e)

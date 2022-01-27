@@ -11,7 +11,7 @@ namespace SecurityManager
     {
         private static EventLog customLog = null;           // u konstruktoru kreiramo objekat
         const string SourceName = "SecurityManager.Audit";
-        const string LogName = "ProjectSecurityTest";       // mozemo bilo koji naziv
+        const string LogName = "MySecTest";       // mozemo bilo koji naziv
 
         static Audit()
         {
