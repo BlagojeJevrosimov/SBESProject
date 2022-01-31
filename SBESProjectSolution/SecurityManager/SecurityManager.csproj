@@ -51,7 +51,6 @@
       <DependentUpon>AuditEventFile.resx</DependentUpon>
     </Compile>
     <Compile Include="AuditEvents.cs" />
-    <Compile Include="CustomAuthorizationManager.cs" />
     <Compile Include="CustomAuthorizationPolicy.cs" />
     <Compile Include="CustomPrincipal.cs" />
     <Compile Include="Formatter.cs" />

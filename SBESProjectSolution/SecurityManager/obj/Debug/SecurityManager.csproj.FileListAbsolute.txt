@@ -1,0 +1,9 @@
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SecurityManager\bin\Debug\SecurityManager.dll
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SecurityManager\bin\Debug\SecurityManager.pdb
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SecurityManager\obj\Debug\SecurityManager.csproj.AssemblyReference.cache
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SecurityManager\obj\Debug\SecurityManager.AuditEventFile.resources
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SecurityManager\obj\Debug\SecurityManager.RolesConfigFile.resources
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SecurityManager\obj\Debug\SecurityManager.csproj.GenerateResource.cache
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SecurityManager\obj\Debug\SecurityManager.csproj.CoreCompileInputs.cache
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SecurityManager\obj\Debug\SecurityManager.dll
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SecurityManager\obj\Debug\SecurityManager.pdb

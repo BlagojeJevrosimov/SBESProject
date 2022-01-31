@@ -19,17 +19,25 @@ namespace ConsumerClient
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
             binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
 
-            Console.WriteLine("Korisnik koji je pokrenuo klijenta je : " + WindowsIdentity.GetCurrent().Name);
-
-            EndpointAddress endpointAddress = new EndpointAddress(new Uri(address),
-                EndpointIdentity.CreateUpnIdentity("syslogServer"));
-
-            using (ConsumerClient proxy = new ConsumerClient(binding, endpointAddress))
+            using (ConsumerClient proxy = new ConsumerClient(binding, new EndpointAddress(new Uri(address))))
             {
-               
-            }
+                 int input = 0;
+                 while (input != 4)
+                {
+                     Console.WriteLine("Choose and action: \n\t1.Subscribe \n\t2.Update \n\t3.Delete \n\t4.Exit");
+                     input = Int32.Parse(Console.ReadLine());
+                     switch (input)
+                     {
+                         case 1: { proxy.Subscribe(); break; }
+                         case 2: { proxy.Update(); break; }
+                         case 3: { proxy.Delete(); break; }
+                         default: break;
 
-            Console.ReadLine();
+                     }
+                 }
+
+            }        
         }
+        
     }
 }

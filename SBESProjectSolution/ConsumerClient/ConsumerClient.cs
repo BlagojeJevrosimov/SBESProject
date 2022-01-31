@@ -21,6 +21,10 @@ namespace ConsumerClient
                 factory.Subscribe();
                 Console.WriteLine("Successfuly subscribed");
             }
+            catch (FaultException e)
+            {
+                Console.WriteLine("Error while trying to Subscribe : {0}", e.Message);
+            }
             catch (Exception e)
             {
                 Console.WriteLine("Error while trying to Subscribe : {0}", e.Message);
@@ -45,7 +49,7 @@ namespace ConsumerClient
 
         #endregion
 
-        #region Modify()
+        #region Update()
 
         public bool Update()
         {
@@ -55,7 +59,7 @@ namespace ConsumerClient
                 retValue = factory.Update();
                 Console.WriteLine("Update allowed");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("Error while trying to Update : {0}", e.Message);
             }
@@ -118,8 +122,8 @@ namespace ConsumerClient
             {
                 factory = null;
             }
-
             this.Close();
+            
         }
     }
 }

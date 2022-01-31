@@ -1,10 +1,12 @@
-C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SyslogServer\obj\Debug\SyslogServer.csproj.AssemblyReference.cache
-C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SyslogServer\obj\Debug\SyslogServer.csproj.CoreCompileInputs.cache
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SyslogServer\bin\Debug\SyslogServer.exe.config
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SyslogServer\bin\Debug\SyslogServer.exe
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SyslogServer\bin\Debug\SyslogServer.pdb
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SyslogServer\bin\Debug\Contracts.dll
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SyslogServer\bin\Debug\SecurityManager.dll
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SyslogServer\bin\Debug\Contracts.pdb
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SyslogServer\bin\Debug\SecurityManager.pdb
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SyslogServer\obj\Debug\SyslogServer.csproj.AssemblyReference.cache
+C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SyslogServer\obj\Debug\SyslogServer.csproj.CoreCompileInputs.cache
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SyslogServer\obj\Debug\SyslogServer.csproj.CopyComplete
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SyslogServer\obj\Debug\SyslogServer.exe
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SyslogServer\obj\Debug\SyslogServer.pdb

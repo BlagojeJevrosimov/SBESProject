@@ -75,7 +75,7 @@ namespace SecurityManager
         /// <param name="userName"></param>
         /// <param name="serviceName"> should be read from the OperationContext as follows: OperationContext.Current.IncomingMessageHeaders.Action</param>
         /// <param name="reason">permission name</param>
-        public static void AuthorizationFailed(string userName, string serviceName, string reason)
+       public static void AuthorizationFailed(string userName, string serviceName, string reason)
         {
             if (customLog != null)
             {
