@@ -27,9 +27,7 @@ namespace SecurityManager
 				{
 					if (resourceManager == null)
 					{
-						resourceManager = new ResourceManager
-							(typeof(AuditEventFile).ToString(),
-							Assembly.GetExecutingAssembly());
+						resourceManager = new ResourceManager(typeof(AuditEventFile).ToString(), Assembly.GetExecutingAssembly());
 					}
 					return resourceManager;
 				}
@@ -40,7 +38,6 @@ namespace SecurityManager
 		{
 			get
 			{
-				// TO DO
 				return ResourceMgr.GetString(AuditEventTypes.AuthenticationSuccess.ToString());
 			}
 		}
@@ -49,7 +46,6 @@ namespace SecurityManager
 		{
 			get
 			{
-				//TO DO
 				return ResourceMgr.GetString(AuditEventTypes.AuthorizationSuccess.ToString());
 			}
 		}
@@ -58,7 +54,6 @@ namespace SecurityManager
 		{
 			get
 			{
-				//TO DO
 				return ResourceMgr.GetString(AuditEventTypes.AuthorizationFailed.ToString());
 			}
 		}

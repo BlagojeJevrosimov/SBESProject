@@ -1,0 +1,6 @@
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\Contracts\bin\x64\Debug\Contracts.dll
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\Contracts\bin\x64\Debug\Contracts.pdb
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\Contracts\obj\x64\Debug\Contracts.csproj.AssemblyReference.cache
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\Contracts\obj\x64\Debug\Contracts.csproj.CoreCompileInputs.cache
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\Contracts\obj\x64\Debug\Contracts.dll
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\Contracts\obj\x64\Debug\Contracts.pdb

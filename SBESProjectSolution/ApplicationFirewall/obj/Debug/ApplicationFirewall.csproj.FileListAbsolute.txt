@@ -1,0 +1,7 @@
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ApplicationFirewall\bin\Debug\ApplicationFirewall.exe.config
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ApplicationFirewall\bin\Debug\ApplicationFirewall.exe
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ApplicationFirewall\bin\Debug\ApplicationFirewall.pdb
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ApplicationFirewall\obj\Debug\ApplicationFirewall.csprojAssemblyReference.cache
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ApplicationFirewall\obj\Debug\ApplicationFirewall.csproj.CoreCompileInputs.cache
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ApplicationFirewall\obj\Debug\ApplicationFirewall.exe
+C:\Users\AS\Desktop\SBESProjekat\SBESProjectSolution\ApplicationFirewall\obj\Debug\ApplicationFirewall.pdb

@@ -21,43 +21,54 @@ namespace ConsumerClient
                 factory.Subscribe();
                 Console.WriteLine("Successfuly subscribed");
             }
-            catch (FaultException e)
+            catch (FaultException<SecurityException> e)
             {
-                Console.WriteLine("Error while trying to Subscribe : {0}", e.Message);
+                Console.WriteLine("Error while trying to Subscribe : {0}", e.Detail.Message);
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error while trying to Subscribe : {0}", e.Message);
             }
         }
+
         #region Read()
 
-        public string Read()
+        public Event Read(int key)
         {
+            Event ret = null;
             try
             {
-                Console.WriteLine(factory.Read());
+                Event ev = factory.Read(key);
+                Console.WriteLine(ev);
                 Console.WriteLine("Read allowed");
+            }
+            catch (FaultException<SecurityException> e)
+            {
+                Console.WriteLine("Error while trying to Read : {0}", e.Detail.Message);
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error while trying to Read : {0}", e.Message);
             }
-            return "";
+            return ret;
 
         }
 
         #endregion
 
-        #region Update()
+        #region Modify()
 
-        public bool Update()
+        public bool Update(Event ev)
         {
             bool retValue = false;
             try
             {
-                retValue = factory.Update();
+                retValue = factory.Update(ev);
                 Console.WriteLine("Update allowed");
+            }
+            catch (FaultException<SecurityException> e)
+            {
+                Console.WriteLine("Error while trying to Update : {0}", e.Detail.Message);
             }
             catch (Exception e)
             {
@@ -70,13 +81,17 @@ namespace ConsumerClient
         #endregion
 
         #region Delete()
-        public bool Delete()
+        public bool Delete(int key)
         {
             bool retValue = false;
             try
             {
-                retValue = factory.Delete();
+                retValue = factory.Delete(key);
                 Console.WriteLine("Delete allowed");
+            }
+            catch (FaultException<SecurityException> e)
+            {
+                Console.WriteLine("Error while trying to Delete : {0}", e.Detail.Message);
             }
             catch (Exception e)
             {
@@ -96,6 +111,10 @@ namespace ConsumerClient
                 factory.ManagePermission(isAdd, rolename, permissions);
                 Console.WriteLine("Manage allowed");
             }
+            catch (FaultException<SecurityException> e)
+            {
+                Console.WriteLine("Error while trying to MenagePermission : {0}", e.Detail.Message);
+            }
             catch (Exception e)
             {
                 Console.WriteLine("Error while trying to ManagePermission : {0}", e.Message);
@@ -108,6 +127,10 @@ namespace ConsumerClient
             {
                 factory.ManageRoles(isAdd, rolename);
                 Console.WriteLine("Manage allowed");
+            }
+            catch (FaultException<SecurityException> e)
+            {
+                Console.WriteLine("Error while trying to ManageRoles : {0}", e.Detail.Message);
             }
             catch (Exception e)
             {
@@ -122,8 +145,8 @@ namespace ConsumerClient
             {
                 factory = null;
             }
+
             this.Close();
-            
         }
     }
 }

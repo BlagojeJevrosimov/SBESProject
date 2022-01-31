@@ -59,5 +59,32 @@ namespace SecurityManager {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} is successfully authenticated..
+        /// </summary>
+        internal static string AuthenticationSuccess {
+            get {
+                return ResourceManager.GetString("AuthenticationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} failed to access {1}. Reason: {2}..
+        /// </summary>
+        internal static string AuthorizationFailure {
+            get {
+                return ResourceManager.GetString("AuthorizationFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} successfully accessed to {1}..
+        /// </summary>
+        internal static string AuthorizationSuccess {
+            get {
+                return ResourceManager.GetString("AuthorizationSuccess", resourceCulture);
+            }
+        }
     }
 }
