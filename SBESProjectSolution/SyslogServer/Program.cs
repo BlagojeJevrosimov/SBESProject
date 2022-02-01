@@ -32,7 +32,7 @@ namespace SyslogServer
             host.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
             host.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
 
-            host.Authorization.ServiceAuthorizationManager = new CustomAuthorizationManager();
+            //host.Authorization.ServiceAuthorizationManager = new CustomAuthorizationManager();
 
             host.Authorization.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
             List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>();

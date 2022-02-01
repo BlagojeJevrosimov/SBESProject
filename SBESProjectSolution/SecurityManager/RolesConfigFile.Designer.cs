@@ -70,7 +70,7 @@ namespace SecurityManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Read,Update,Delete.
+        ///   Looks up a localized string similar to Read,Update.
         /// </summary>
         internal static string Operators {
             get {

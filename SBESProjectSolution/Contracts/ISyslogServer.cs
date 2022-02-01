@@ -16,7 +16,7 @@ namespace Contracts
 
         [OperationContract]
         [FaultContract(typeof(SecurityException))]
-        Event Read(int key);  // traziti po kljucu, vraca objekat
+        List<string> Read();
 
         [OperationContract]
         [FaultContract(typeof(SecurityException))]

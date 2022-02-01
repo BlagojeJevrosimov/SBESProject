@@ -12,6 +12,8 @@ namespace SyslogServer
 {
     public class SyslogServer : ISyslogServer
     {
+        string address = "net.tcp://localhost:9998/Client";
+        Dictionary<string, List<string>> logs = new Dictionary<string, List<string>>();
         [PrincipalPermission(SecurityAction.Demand, Role = "Read")]
         public void Subscribe() 
         {
@@ -24,9 +26,16 @@ namespace SyslogServer
             {
                 Database.subscribers[windowsIdentity.User.ToString()] = 
                     new Consumer(windowsIdentity.Name, windowsIdentity.User.ToString());
+                logs[windowsIdentity.User.ToString()] = new List<string>();
                                                         // security identifier
-                Audit.AuthorizationSuccess(userName,
+                string message = Audit.AuthorizationSuccess(userName,
                     OperationContext.Current.IncomingMessageHeaders.Action);
+
+                foreach (var c in logs)
+                {
+                    c.Value.Add(message);
+                }
+
             }
             else {
                 string name = Thread.CurrentPrincipal.Identity.Name;
@@ -228,7 +237,7 @@ namespace SyslogServer
                 try
                 {
                     Audit.AuthorizationFailed(userName,
-                        OperationContext.Current.IncomingMessageHeaders.Action, "Update method needs Update permission.");
+                        OperationContext.Current.IncomingMessageHeaders.Action, "User doesn't have Update permission.");
                 }
                 catch (FaultException<SecurityException> e)
                 {
@@ -240,15 +249,16 @@ namespace SyslogServer
                 }
 
                 throw new FaultException("User " + userName +
-                    " tried to call Update method. Update method needs Update permission.");
+                    " tried to call Update method without permission");
             }
         }
 
-        //[PrincipalPermission(SecurityAction.Demand, Role = "Read")]
-        public Event Read(int key)
+        [PrincipalPermission(SecurityAction.Demand, Role = "Read")]
+        public List<string> Read()
         {
             // Posto se read proverava u CheckAccessCore metodi, autorizacija je uspesna, ne moramo proveravati
             Console.WriteLine("Read successfully executed.");
+            WindowsIdentity windowsIdentity = Thread.CurrentPrincipal.Identity as WindowsIdentity;
 
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             string userName = Formatter.ParseName(principal.Identity.Name);
@@ -256,12 +266,16 @@ namespace SyslogServer
             try
             {
                 // logujemo uspesnu autorizaciju
-                Audit.AuthorizationSuccess(userName,
+                string log = Audit.AuthorizationSuccess(userName,
                     OperationContext.Current.IncomingMessageHeaders.Action);    // naziv servisa
-                if (Database.events.ContainsKey(key))
-                {
-                    return Database.events[key];
-                }
+                logs[windowsIdentity.User.ToString()].Add(log);
+                List<string> logovi = new List<string>();
+                logs[windowsIdentity.User.ToString()].ForEach(delegate(string s){
+                    logovi.Add(s);
+                }) ;
+                logs[windowsIdentity.User.ToString()].Clear();
+                return logovi;
+
             }
             catch (FaultException<SecurityException> e)
             {
@@ -274,5 +288,6 @@ namespace SyslogServer
 
             return null;
         }
+
     }
  }

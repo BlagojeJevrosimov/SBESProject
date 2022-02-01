@@ -121,7 +121,7 @@
     <value>Read,Update,Delete,Administrate</value>
   </data>
   <data name="Operators" xml:space="preserve">
-    <value>Read,Update,Delete</value>
+    <value>Read,Update</value>
   </data>
   <data name="Readers" xml:space="preserve">
     <value>Read</value>

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
+using Contracts;
 
 namespace ConsumerClient
 {
@@ -36,7 +38,7 @@ namespace ConsumerClient
                     switch (x)
                     {
                         case "1":
-                            proxy.Read(1);
+                        //    proxy.Read(1);
                             break;
                         case "2":
                             //proxy.Update();
@@ -44,11 +46,14 @@ namespace ConsumerClient
                         case "3":
                             //proxy.Delete();
                             break;
+                        case "4":
+                            proxy.Read();
+                            break;
                     }
                 }
             }
-
         }
+
 
         static void PrintMenu()
         {
@@ -56,6 +61,8 @@ namespace ConsumerClient
             Console.WriteLine("1. Read");
             Console.WriteLine("2. Update");
             Console.WriteLine("3. Delete");
+            Console.WriteLine("4. View new recieved event logs");
+            
         }
     }
 }

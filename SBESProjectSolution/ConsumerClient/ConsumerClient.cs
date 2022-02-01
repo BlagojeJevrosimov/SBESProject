@@ -31,31 +31,6 @@ namespace ConsumerClient
             }
         }
 
-        #region Read()
-
-        public Event Read(int key)
-        {
-            Event ret = null;
-            try
-            {
-                Event ev = factory.Read(key);
-                Console.WriteLine(ev);
-                Console.WriteLine("Read allowed");
-            }
-            catch (FaultException<SecurityException> e)
-            {
-                Console.WriteLine("Error while trying to Read : {0}", e.Detail.Message);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error while trying to Read : {0}", e.Message);
-            }
-            return ret;
-
-        }
-
-        #endregion
-
         #region Modify()
 
         public bool Update(Event ev)
@@ -148,5 +123,33 @@ namespace ConsumerClient
 
             this.Close();
         }
+
+        public void Read()
+        {
+            try
+            {
+                List<string> messages= factory.Read();
+                Console.WriteLine("Recieved logs:\n");
+                foreach (var m in messages)
+                {
+                    Console.WriteLine(m);
+                }
+                Console.WriteLine("\n");
+            }
+            catch (FaultException<SecurityException> e)
+            {
+                Console.WriteLine("Error while trying to Subscribe : {0}", e.Detail.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error while trying to Subscribe : {0}", e.Message);
+            }
+        }
+
+        List<string> ISyslogServer.Read()
+        {
+            throw new NotImplementedException();
+        }
     }
+    
 }

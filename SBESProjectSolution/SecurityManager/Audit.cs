@@ -47,7 +47,7 @@ namespace SecurityManager
             }
         }
 
-        public static void AuthorizationSuccess(string userName, string serviceName)
+        public static string AuthorizationSuccess(string userName, string serviceName)
         {
             
             if (customLog != null)
@@ -55,6 +55,7 @@ namespace SecurityManager
                 string AuthorizationSuccess = AuditEvents.AuthorizationSuccess;
                 string message = String.Format(AuthorizationSuccess, userName, serviceName);    // prosledjujemo i naziv metode
                 customLog.WriteEntry(message);
+                return message;
             }
             else
             {
