@@ -13,11 +13,9 @@ namespace ApplicationFirewall
     {
         internal static List<int> validPorts = new List<int>();
         internal static List<string> validProtocols = new List<string>();
-        private static int key;
 
         static WhitelistConfig()
         {
-            key = 0;
 
             validPorts.Add(9999);
             validPorts.Add(9998);
@@ -34,7 +32,7 @@ namespace ApplicationFirewall
             if (!validPorts.Contains(port))
             {
                 validPorts.Add(port);
-                ev = new Event(++key, CriticallityLevel.GREEN_ALERT, DateTime.Now, null, "AddPort", MessageState.OPEN);
+                ev = new Event(CriticallityLevel.GREEN_ALERT, DateTime.Now, null, "AddPort", MessageState.OPEN);
 
                 try
                 {
@@ -59,7 +57,7 @@ namespace ApplicationFirewall
             if (validPorts.Contains(port))
             {
                 validPorts.Remove(port);
-                ev = new Event(++key, CriticallityLevel.YELLOW_ALERT, DateTime.Now, null, "RemovePort", MessageState.CLOSE);
+                ev = new Event( CriticallityLevel.YELLOW_ALERT, DateTime.Now, null, "RemovePort", MessageState.CLOSE);
 
                 try
                 {
@@ -86,7 +84,7 @@ namespace ApplicationFirewall
             if (!validProtocols.Contains(protocol))
             {
                 validProtocols.Add(protocol);
-                ev = new Event(++key, CriticallityLevel.GREEN_ALERT, DateTime.Now, null, "AddProtocol", MessageState.OPEN);
+                ev = new Event(CriticallityLevel.GREEN_ALERT, DateTime.Now, null, "AddProtocol", MessageState.OPEN);
 
                 try
                 {
@@ -113,7 +111,7 @@ namespace ApplicationFirewall
             if (validProtocols.Contains(protocol))
             {
                 validProtocols.Remove(protocol);
-                ev = new Event(++key, CriticallityLevel.RED_ALERT, DateTime.Now, null, "RemoveProtocol", MessageState.CLOSE);
+                ev = new Event(CriticallityLevel.RED_ALERT, DateTime.Now, null, "RemoveProtocol", MessageState.CLOSE);
 
                 try
                 {
