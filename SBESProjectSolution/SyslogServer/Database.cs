@@ -10,15 +10,13 @@ namespace SyslogServer
     public class Database
     {
         internal static Dictionary<string, Consumer> subscribers = new Dictionary<string, Consumer>();
-
+        internal static int eventKey = 0;
         internal static Dictionary<int, Event> events = new Dictionary<int, Event>();   // logovi
 
         static Database()
         {
-            Event e1 = new Event(1, CriticallityLevel.GREEN_ALERT, DateTime.Now, 
-                new Consumer("wcfclient", "1"), "poruka", MessageState.OPEN);
-
-            events.Add(1, e1);
+            events[1] = new Event(CriticallityLevel.GREEN_ALERT,DateTime.Now,new Consumer("pera","sid"),"Poruka",MessageState.OPEN);
+            events[2] = new Event(CriticallityLevel.YELLOW_ALERT, DateTime.Now, new Consumer("pera", "sid"), "Poruka2", MessageState.CLOSE);
         }
     }
 }

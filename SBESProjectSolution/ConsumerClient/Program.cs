@@ -28,26 +28,26 @@ namespace ConsumerClient
 
             using (ConsumerClient proxy = new ConsumerClient(binding, new EndpointAddress(new Uri(address))))
             {
-                proxy.Subscribe();
 
                 while (true)
                 {
+                    Console.Clear();
                     PrintMenu();
                     string x = Console.ReadLine();
 
                     switch (x)
                     {
                         case "1":
-                        //    proxy.Read(1);
+                            proxy.Read();
                             break;
                         case "2":
-                            //proxy.Update();
+                            proxy.Update(0,0);
                             break;
                         case "3":
                             //proxy.Delete();
                             break;
                         case "4":
-                            proxy.Read();
+                            proxy.Subscribe();
                             break;
                     }
                 }
@@ -58,11 +58,10 @@ namespace ConsumerClient
         static void PrintMenu()
         {
             Console.WriteLine("Odaberite opciju:");
-            Console.WriteLine("1. Read");
+            Console.WriteLine("1. View new recieved event logs");
             Console.WriteLine("2. Update");
             Console.WriteLine("3. Delete");
-            Console.WriteLine("4. View new recieved event logs");
-            
+            Console.WriteLine("4. Subscribe");
         }
     }
 }

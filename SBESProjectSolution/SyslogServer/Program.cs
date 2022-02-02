@@ -20,6 +20,7 @@ namespace SyslogServer
             NetTcpBinding binding = new NetTcpBinding();
             string address = "net.tcp://localhost:9999/SyslogServer";
 
+
             binding.Security.Mode = SecurityMode.Transport;
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
             binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
@@ -47,10 +48,17 @@ namespace SyslogServer
             host.Description.Behaviors.Add(newAudit);
 
             host.Open();
-            Console.WriteLine("WCFService is opened. Press <enter> to finish...");
-            Console.ReadLine();
+            Console.WriteLine("WCFService to Consumer is opened.\n");
 
+            string address2 = "net.tcp://localhost:9998/SyslogServerSecurityEvent";
+            ServiceHost host2 = new ServiceHost(typeof(SyslogServerSecurityEvent));
+            host2.AddServiceEndpoint(typeof(ISyslogServerSecurityEvent), new NetTcpBinding(), address2);
+
+            host2.Open();
+            Console.WriteLine("WCFService to Whitelist and Detection system is opened. Press any key to close...");
+            Console.ReadKey();
             host.Close();
+            host2.Close();
 
         }
     }

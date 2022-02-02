@@ -18,38 +18,65 @@ namespace ConsumerClient
         {
             try
             {
+                Console.Clear();
                 factory.Subscribe();
-                Console.WriteLine("Successfuly subscribed");
+                Console.WriteLine("Successfuly subscribed to security event logs.");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
             catch (FaultException<SecurityException> e)
             {
                 Console.WriteLine("Error while trying to Subscribe : {0}", e.Detail.Message);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error while trying to Subscribe : {0}", e.Message);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
         }
 
         #region Modify()
 
-        public bool Update(Event ev)
+        public void Update(int key, MessageState ms)
         {
-            bool retValue = false;
+            
             try
             {
-                retValue = factory.Update(ev);
-                Console.WriteLine("Update allowed");
+                Read();
+                Console.WriteLine("Choose key of event log: ");
+                key = Int32.Parse(Console.ReadLine());
+                Console.WriteLine("Chose new State of log(OPEN/CLOSE):");
+                string state = Console.ReadLine();
+                if (state.ToLower() == "open")
+                {
+                    ms = MessageState.OPEN;
+                }
+                else if (state.ToLower() == "close")
+                {
+                    ms = MessageState.CLOSE;
+                }
+                else ms = MessageState.OPEN;
+                
+                factory.Update(key,ms);
+                Console.WriteLine("Updated event with key:{0} to state {1} successfully",key,ms);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
             catch (FaultException<SecurityException> e)
             {
                 Console.WriteLine("Error while trying to Update : {0}", e.Detail.Message);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error while trying to Update : {0}", e.Message);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
-            return retValue;
         }
 
 
@@ -124,31 +151,35 @@ namespace ConsumerClient
             this.Close();
         }
 
-        public void Read()
+
+        public Dictionary<int, Event> Read()
         {
             try
             {
-                List<string> messages= factory.Read();
+                Console.Clear();
+                Dictionary<int, Event> events = factory.Read();
                 Console.WriteLine("Recieved logs:\n");
-                foreach (var m in messages)
+                foreach (var e in events)
                 {
-                    Console.WriteLine(m);
+                    Console.WriteLine(e.Key.ToString() + ":" + e.Value);
                 }
-                Console.WriteLine("\n");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                return events;
             }
             catch (FaultException<SecurityException> e)
             {
-                Console.WriteLine("Error while trying to Subscribe : {0}", e.Detail.Message);
+                Console.WriteLine("Error while trying to Read : {0}", e.Detail.Message);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error while trying to Subscribe : {0}", e.Message);
+                Console.WriteLine("Error while trying to Read : {0}", e.Message);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
-        }
-
-        List<string> ISyslogServer.Read()
-        {
-            throw new NotImplementedException();
+            return null;
         }
     }
     

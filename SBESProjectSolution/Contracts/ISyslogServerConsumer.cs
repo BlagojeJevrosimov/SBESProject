@@ -16,11 +16,11 @@ namespace Contracts
 
         [OperationContract]
         [FaultContract(typeof(SecurityException))]
-        List<string> Read();
+        Dictionary<int, Event> Read();
 
         [OperationContract]
         [FaultContract(typeof(SecurityException))]
-        bool Update(Event ev);  // prosledjujemo kljuc i izmenjen objekat
+        void Update(int key, MessageState ms);  // prosledjujemo kljuc i izmenjen objekat
 
         [OperationContract]
         [FaultContract(typeof(SecurityException))]

@@ -63,7 +63,8 @@
   <ItemGroup>
     <Compile Include="Consumer.cs" />
     <Compile Include="Event.cs" />
-    <Compile Include="ISyslogServer.cs" />
+    <Compile Include="ISyslogServerConsumer.cs" />
+    <Compile Include="ISyslogServerSecurityEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityException.cs" />
   </ItemGroup>

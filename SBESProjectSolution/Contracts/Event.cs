@@ -15,33 +15,18 @@ namespace Contracts
     [DataContract]
     public class Event
     {
-        int key;
         CriticallityLevel criticallity;
         DateTime timestamp;
         Consumer source;
         string message;
         MessageState state;
 
-        public Event(int key, CriticallityLevel criticallity, DateTime timestamp, Consumer source, string message, MessageState state)
+        public Event( CriticallityLevel criticallity, DateTime timestamp, Consumer source, string message, MessageState state)
         {
-            this.key = key;
             this.timestamp = timestamp;
             this.source = source;
             this.message = message;
             this.state = state;
-        }
-
-        [DataMember]
-        public int Key 
-        {
-            get 
-            {
-                return this.key;
-            }
-            set
-            {
-                this.key = value;
-            }
         }
 
         [DataMember]
@@ -109,13 +94,10 @@ namespace Contracts
             }
         }
 
-        public void Update(Event newEv)
+        public void Update(MessageState ms)
         {
-            this.Criticallity = newEv.Criticallity;
-            this.Timestamp = newEv.Timestamp;
-            this.Source = newEv.Source;
-            this.Message = newEv.Message;
-            this.State = newEv.State;
+
+            this.State = ms;
         }
 
         public override string ToString()
@@ -123,5 +105,8 @@ namespace Contracts
             return string.Format("\tCriticallity: {0}\n\tTimestamp: {1}\n\tSource: {2}\tMessage: {3}\n\tState: {4}",
                 criticallity.ToString(), timestamp.ToString(), Source.ToString(), message, state.ToString());
         }
+        /*~Event() {
+            Event.key--;
+        }*/
     }
 }
