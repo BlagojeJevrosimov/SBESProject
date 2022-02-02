@@ -44,7 +44,7 @@ namespace ConsumerClient
                             proxy.Update(0,0);
                             break;
                         case "3":
-                            //proxy.Delete();
+                            proxy.Delete(0);
                             break;
                         case "4":
                             proxy.Subscribe();

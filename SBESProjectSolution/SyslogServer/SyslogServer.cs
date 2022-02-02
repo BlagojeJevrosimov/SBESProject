@@ -36,55 +36,72 @@ namespace SyslogServer
             }
         }
 
-        //[PrincipalPermission(SecurityAction.Demand, Role = "Delete")]
-        public bool Delete(int key)
+        [PrincipalPermission(SecurityAction.Demand, Role = "Delete")]
+        public void Delete(int key)
+        {
+            if (Database.events.ContainsKey(key))
+            {
+                Database.events.Remove(key);
+            }
+            else {
+
+                string name = Thread.CurrentPrincipal.Identity.Name;
+                DateTime time = DateTime.Now;
+                string message = String.Format("Event log with key {0} doesn't exist. (time : {1}).", key, time.TimeOfDay);
+                throw new FaultException<SecurityException>(new SecurityException(message));
+            }
+            
+        }
+
+        [PrincipalPermission(SecurityAction.Demand, Role = "Update")]
+        public void Update(int key, MessageState ms)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             string userName = Formatter.ParseName(principal.Identity.Name);
 
-            if (Thread.CurrentPrincipal.IsInRole("Delete"))
+            if (Database.events.ContainsKey(key))
             {
-                Console.WriteLine("Delete successfully executed.");
+                Database.events[key].Update(ms);
+                Console.WriteLine("Update successfully executed.");
 
-                try
-                {
-                    Audit.AuthorizationSuccess(userName,
-                        OperationContext.Current.IncomingMessageHeaders.Action);
-                    return Database.events.Remove(key);
-                }
-                catch (FaultException<SecurityException> e)
-                {
-                    Console.WriteLine(e.Detail.Message);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
 
-                return false;
             }
             else
             {
-                try
-                {
-                    Audit.AuthorizationFailed(userName,
-                        OperationContext.Current.IncomingMessageHeaders.Action, "Delete method need Delete permission.");
-                }
-                catch (FaultException<SecurityException> e)
-                {
-                    Console.WriteLine(e.Detail.Message);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-
-                throw new FaultException("User " + userName +
-                    " try to call Delete method. Delete method need Delete permission.");
+                string name = Thread.CurrentPrincipal.Identity.Name;
+                DateTime time = DateTime.Now;
+                string message = String.Format("Event key doesn't exist (time : {0}).", time.TimeOfDay);
+                throw new FaultException<SecurityException>(new SecurityException(message));
             }
+
         }
 
-        //[PrincipalPermission(SecurityAction.Demand, Role = "Administrate")]
+        [PrincipalPermission(SecurityAction.Demand, Role = "Read")]
+        public Dictionary<int, Event> Read()
+        {
+            WindowsIdentity windowsIdentity = Thread.CurrentPrincipal.Identity as WindowsIdentity;
+
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            string userName = Formatter.ParseName(principal.Identity.Name);
+
+            if (Database.subscribers.ContainsKey(windowsIdentity.User.ToString()))
+            {
+                Console.WriteLine("Read successfully executed.");
+                return Database.events;
+
+            }
+            else
+            {
+                string name = Thread.CurrentPrincipal.Identity.Name;
+                DateTime time = DateTime.Now;
+                string message = String.Format("User {0} is not subscribed (time : {1}).", name, time.TimeOfDay);
+                throw new FaultException<SecurityException>(new SecurityException(message));
+            }
+
+
+        }
+
+        [PrincipalPermission(SecurityAction.Demand, Role = "Administrate")]
         public void ManagePermission(bool isAdd, string rolename, params string[] permissions)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
@@ -138,7 +155,7 @@ namespace SyslogServer
             }
         }
 
-        //[PrincipalPermission(SecurityAction.Demand, Role = "Administrate")]
+        [PrincipalPermission(SecurityAction.Demand, Role = "Administrate")]
         public void ManageRoles(bool isAdd, string rolename)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
@@ -193,52 +210,7 @@ namespace SyslogServer
             }
         }
 
-        [PrincipalPermission(SecurityAction.Demand, Role = "Update")]
-        public void Update(int key,MessageState ms)
-        {
-            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-            string userName = Formatter.ParseName(principal.Identity.Name);
 
-            if (Database.events.ContainsKey(key))
-            {
-                Database.events[key].Update(ms);
-                Console.WriteLine("Update successfully executed.");
-
-
-            }
-            else {
-                string name = Thread.CurrentPrincipal.Identity.Name;
-                DateTime time = DateTime.Now;
-                string message = String.Format("Event key doesn't exist (time : {0}).", time.TimeOfDay);
-                throw new FaultException<SecurityException>(new SecurityException(message));
-            }
-            
-        }
-
-        [PrincipalPermission(SecurityAction.Demand, Role = "Read")]
-        public Dictionary<int, Event> Read()
-        {
-            WindowsIdentity windowsIdentity = Thread.CurrentPrincipal.Identity as WindowsIdentity;
-
-            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-            string userName = Formatter.ParseName(principal.Identity.Name);
-
-            if (Database.subscribers.ContainsKey(windowsIdentity.User.ToString()))
-            {
-                Console.WriteLine("Read successfully executed.");
-                return Database.events;
-
-            }
-            else
-            {
-                string name = Thread.CurrentPrincipal.Identity.Name;
-                DateTime time = DateTime.Now;
-                string message = String.Format("User {0} is not subscribed (time : {1}).", name, time.TimeOfDay);
-                throw new FaultException<SecurityException>(new SecurityException(message));
-            }
-
-
-        }
 
     }
  }

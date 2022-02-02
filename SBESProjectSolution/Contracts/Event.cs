@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 namespace Contracts
 {
     [DataContract]
-    public enum CriticallityLevel { [EnumMember] GREEN_ALERT, [EnumMember] YELLOW_ALERT, [EnumMember] RED_ALERT }
+    public enum CriticallityLevel {[EnumMember] GREEN_ALERT, [EnumMember] YELLOW_ALERT, [EnumMember] RED_ALERT }
     [DataContract]
-    public enum MessageState { [EnumMember] OPEN, [EnumMember] CLOSE }
+    public enum MessageState {[EnumMember] OPEN, [EnumMember] CLOSE }
+
 
     [DataContract]
     public class Event

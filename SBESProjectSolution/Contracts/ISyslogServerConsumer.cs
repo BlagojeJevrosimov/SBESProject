@@ -24,7 +24,7 @@ namespace Contracts
 
         [OperationContract]
         [FaultContract(typeof(SecurityException))]
-        bool Delete(int key);  // prosledjujemo kljuc
+        void Delete(int key);  // prosledjujemo kljuc
 
         [OperationContract]
         [FaultContract(typeof(SecurityException))]
