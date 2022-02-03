@@ -4,9 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Policy;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using System.ServiceModel.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,15 +19,47 @@ namespace SyslogServer
     {
         static void Main(string[] args)
         {
-            NetTcpBinding binding = new NetTcpBinding();
-            string address = "net.tcp://localhost:9999/SyslogServer";
+            // APPFIREWALL
 
+            /// srvCertCN.SubjectName should be set to the service's username. .NET WindowsIdentity class provides information about Windows user running the given process
+			string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);      // "wcfserver"
+
+            NetTcpBinding binding = new NetTcpBinding();
+            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
+
+            string address = "net.tcp://localhost:8888/SyslogServerSecurityEvent";
+            ServiceHost hostAF = new ServiceHost(typeof(SyslogServerSecurityEvent));
+            hostAF.AddServiceEndpoint(typeof(ISyslogServerSecurityEvent), binding, address);
+
+            hostAF.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.ChainTrust;
+            hostAF.Credentials.ClientCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
+
+            ///Set appropriate service's certificate on the host. Use CertManager class to obtain the certificate based on the "srvCertCN"
+            // host.Credentials.ServiceCertificate.Certificate
+            hostAF.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
+            // izvlacimo iz serverske app (My)
+
+            try
+            {
+                hostAF.Open();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("[ERROR] {0}", e.Message);
+                Console.WriteLine("[StackTrace] {0}", e.StackTrace);
+            }
+
+            Console.WriteLine("Server je ostvario komunikaciju sa AF.");
+
+
+            // KLIJENT
+
+            binding = new NetTcpBinding();
+            address = "net.tcp://localhost:9999/SyslogServer";
 
             binding.Security.Mode = SecurityMode.Transport;
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
             binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
-
-            Console.WriteLine("Korisnik koji je pokrenuo server je : " + WindowsIdentity.GetCurrent().Name);
 
             ServiceHost host = new ServiceHost(typeof(SyslogServer));
             host.AddServiceEndpoint(typeof(ISyslogServer), binding, address);
@@ -50,16 +84,9 @@ namespace SyslogServer
             host.Open();
             Console.WriteLine("WCFService to Consumer is opened.\n");
 
-            string address2 = "net.tcp://localhost:9998/SyslogServerSecurityEvent";
-            ServiceHost host2 = new ServiceHost(typeof(SyslogServerSecurityEvent));
-            host2.AddServiceEndpoint(typeof(ISyslogServerSecurityEvent), new NetTcpBinding(), address2);
-
-            host2.Open();
-            Console.WriteLine("WCFService to Whitelist and Detection system is opened. Press any key to close...");
             Console.ReadKey();
             host.Close();
-            host2.Close();
-
+            hostAF.Close();
         }
     }
 }

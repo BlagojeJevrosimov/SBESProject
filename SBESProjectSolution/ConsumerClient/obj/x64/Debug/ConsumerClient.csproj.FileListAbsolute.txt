@@ -18,3 +18,13 @@ C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\ConsumerClient\obj\
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\ConsumerClient\obj\x64\Debug\ConsumerClient.csproj.CopyComplete
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\ConsumerClient\obj\x64\Debug\ConsumerClient.exe
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\ConsumerClient\obj\x64\Debug\ConsumerClient.pdb
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ConsumerClient\bin\x64\Debug\ConsumerClient.exe.config
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ConsumerClient\bin\x64\Debug\ConsumerClient.exe
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ConsumerClient\bin\x64\Debug\ConsumerClient.pdb
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ConsumerClient\bin\x64\Debug\Contracts.dll
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ConsumerClient\bin\x64\Debug\Contracts.pdb
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ConsumerClient\obj\x64\Debug\ConsumerClient.csproj.AssemblyReference.cache
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ConsumerClient\obj\x64\Debug\ConsumerClient.csproj.CoreCompileInputs.cache
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ConsumerClient\obj\x64\Debug\ConsumerClient.csproj.CopyComplete
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ConsumerClient\obj\x64\Debug\ConsumerClient.exe
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ConsumerClient\obj\x64\Debug\ConsumerClient.pdb

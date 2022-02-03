@@ -57,7 +57,7 @@ namespace ApplicationFirewall
             if (validPorts.Contains(port))
             {
                 validPorts.Remove(port);
-                ev = new Event( CriticallityLevel.YELLOW_ALERT, DateTime.Now, null, "RemovePort", MessageState.CLOSE);
+                ev = new Event(CriticallityLevel.YELLOW_ALERT, DateTime.Now, null, "RemovePort", MessageState.CLOSE);
 
                 try
                 {

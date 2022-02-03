@@ -69,6 +69,7 @@
       <DependentUpon>AuditEventFile.resx</DependentUpon>
     </Compile>
     <Compile Include="AuditEvents.cs" />
+    <Compile Include="CertManager.cs" />
     <Compile Include="CustomAuthorizationPolicy.cs" />
     <Compile Include="CustomPrincipal.cs" />
     <Compile Include="Formatter.cs" />
@@ -79,6 +80,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RolesConfigFile.resx</DependentUpon>
     </Compile>
+    <Compile Include="ServiceCertValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AuditEventFile.resx">

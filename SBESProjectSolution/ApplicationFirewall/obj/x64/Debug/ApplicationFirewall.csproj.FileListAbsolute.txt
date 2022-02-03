@@ -10,3 +10,15 @@ C:\Users\User\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewa
 C:\Users\User\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewall\bin\x64\Debug\Contracts.pdb
 C:\Users\User\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewall\obj\x64\Debug\ApplicationFirewall.csprojAssemblyReference.cache
 C:\Users\User\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewall\obj\x64\Debug\ApplicationFirewall.csproj.CopyComplete
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewall\bin\x64\Debug\ApplicationFirewall.exe.config
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewall\bin\x64\Debug\ApplicationFirewall.exe
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewall\bin\x64\Debug\ApplicationFirewall.pdb
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewall\bin\x64\Debug\AFManager.dll
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewall\bin\x64\Debug\Contracts.dll
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewall\bin\x64\Debug\AFManager.pdb
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewall\bin\x64\Debug\Contracts.pdb
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewall\obj\x64\Debug\ApplicationFirewall.csproj.AssemblyReference.cache
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewall\obj\x64\Debug\ApplicationFirewall.csproj.CoreCompileInputs.cache
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewall\obj\x64\Debug\ApplicationFirewall.csproj.CopyComplete
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewall\obj\x64\Debug\ApplicationFirewall.exe
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\ApplicationFirewall\obj\x64\Debug\ApplicationFirewall.pdb

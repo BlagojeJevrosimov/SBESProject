@@ -14,6 +14,7 @@ namespace SyslogServer
         public void sendEvent(Event ev)
         {
             m.WaitOne();
+            Console.WriteLine(ev);
             Database.events[Database.eventKey] = ev;
             Database.eventKey++;
             m.ReleaseMutex();

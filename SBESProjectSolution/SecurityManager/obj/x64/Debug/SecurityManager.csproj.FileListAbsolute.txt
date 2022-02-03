@@ -16,3 +16,12 @@ C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SecurityManager\obj
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.csproj.CoreCompileInputs.cache
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.dll
 C:\Users\Zobla\Desktop\GITWS\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.pdb
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\bin\x64\Debug\SecurityManager.dll
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\bin\x64\Debug\SecurityManager.pdb
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.csproj.AssemblyReference.cache
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.AuditEventFile.resources
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.RolesConfigFile.resources
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.csproj.GenerateResource.cache
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.csproj.CoreCompileInputs.cache
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.dll
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.pdb
