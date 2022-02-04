@@ -10,7 +10,7 @@ namespace AFManager
     public class Audit : IDisposable
     {
         private static EventLog customLog = null;           // u konstruktoru kreiramo objekat
-        const string SourceName = "SecurityManager.Audit";
+        const string SourceName = "AFManager.Audit";
         const string LogName = "MySecTest2";       // mozemo bilo koji naziv
 
         static Audit()

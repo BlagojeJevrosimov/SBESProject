@@ -32,7 +32,7 @@ namespace ApplicationFirewall
             if (!validPorts.Contains(port))
             {
                 validPorts.Add(port);
-                ev = new Event(CriticallityLevel.GREEN_ALERT, DateTime.Now, null, "AddPort", MessageState.OPEN);
+                ev = new Event(CriticallityLevel.GREEN_ALERT, DateTime.Now, null, "AddPort" + port.ToString(), MessageState.OPEN);
 
                 try
                 {
@@ -57,7 +57,7 @@ namespace ApplicationFirewall
             if (validPorts.Contains(port))
             {
                 validPorts.Remove(port);
-                ev = new Event(CriticallityLevel.YELLOW_ALERT, DateTime.Now, null, "RemovePort", MessageState.CLOSE);
+                ev = new Event(CriticallityLevel.YELLOW_ALERT, DateTime.Now, null, "RemovePort" + port.ToString(), MessageState.CLOSE);
 
                 try
                 {
@@ -84,7 +84,7 @@ namespace ApplicationFirewall
             if (!validProtocols.Contains(protocol))
             {
                 validProtocols.Add(protocol);
-                ev = new Event(CriticallityLevel.GREEN_ALERT, DateTime.Now, null, "AddProtocol", MessageState.OPEN);
+                ev = new Event(CriticallityLevel.GREEN_ALERT, DateTime.Now, null, "AddProtocol" + protocol, MessageState.OPEN);
 
                 try
                 {
@@ -111,7 +111,7 @@ namespace ApplicationFirewall
             if (validProtocols.Contains(protocol))
             {
                 validProtocols.Remove(protocol);
-                ev = new Event(CriticallityLevel.RED_ALERT, DateTime.Now, null, "RemoveProtocol", MessageState.CLOSE);
+                ev = new Event(CriticallityLevel.RED_ALERT, DateTime.Now, null, "RemoveProtocol" + protocol, MessageState.CLOSE);
 
                 try
                 {

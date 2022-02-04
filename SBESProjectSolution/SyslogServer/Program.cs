@@ -19,10 +19,10 @@ namespace SyslogServer
     {
         static void Main(string[] args)
         {
-            // APPFIREWALL
+            #region AF
 
             /// srvCertCN.SubjectName should be set to the service's username. .NET WindowsIdentity class provides information about Windows user running the given process
-			string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);      // "wcfserver"
+            string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);      // "wcfserver"
 
             NetTcpBinding binding = new NetTcpBinding();
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
@@ -51,8 +51,42 @@ namespace SyslogServer
 
             Console.WriteLine("Server je ostvario komunikaciju sa AF.");
 
+            #endregion
 
-            // KLIJENT
+            #region AFCC
+
+            binding = new NetTcpBinding();
+            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
+
+            address = "net.tcp://localhost:7777/SyslogServerSecuritzEvent";
+            ServiceHost hostAFCC = new ServiceHost(typeof(SyslogServerSecurityEvent));
+            hostAFCC.AddServiceEndpoint(typeof(ISyslogServerSecurityEvent), binding, address);
+
+            ///Custom validation mode enables creation of a custom validator - CustomCertificateValidator
+
+            ///If CA doesn't have a CRL associated, WCF blocks every client because it cannot be validated
+            hostAFCC.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
+            hostAFCC.Credentials.ClientCertificate.Authentication.CustomCertificateValidator = new ServiceCertValidator();
+
+            hostAFCC.Credentials.ClientCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
+
+            ///Set appropriate service's certificate on the host. Use CertManager class to obtain the certificate based on the "srvCertCN"
+            hostAFCC.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
+            // izvlacimo iz serverske app (My)
+
+            try
+            {
+                hostAFCC.Open();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("[ERROR] {0}", e.Message);
+                Console.WriteLine("[StackTrace] {0}", e.StackTrace);
+            }
+
+            #endregion
+
+            #region Client
 
             binding = new NetTcpBinding();
             address = "net.tcp://localhost:9999/SyslogServer";
@@ -84,9 +118,12 @@ namespace SyslogServer
             host.Open();
             Console.WriteLine("WCFService to Consumer is opened.\n");
 
+            #endregion
+
             Console.ReadKey();
             host.Close();
             hostAF.Close();
+            hostAFCC.Close();
         }
     }
 }

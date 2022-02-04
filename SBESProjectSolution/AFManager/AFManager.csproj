@@ -43,6 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Audit.cs" />
+    <Compile Include="AuditCC.cs" />
+    <Compile Include="AuditCCEventFile.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuditCCEventFile.resx</DependentUpon>
+    </Compile>
+    <Compile Include="AuditCCEvents.cs" />
     <Compile Include="AuditEvents.cs" />
     <Compile Include="AuditEventFile.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -55,6 +62,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AuditCCEventFile.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AuditCCEventFile.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="AuditEventFile.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AuditEventFile.Designer.cs</LastGenOutput>

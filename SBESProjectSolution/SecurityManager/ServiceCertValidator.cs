@@ -19,7 +19,35 @@ namespace SecurityManager
         /// <param name="certificate"> certificate to be validate </param>
         public override void Validate(X509Certificate2 certificate)     // klijentov sertifikat
         {
-            // 4.2
+            // KLIJENTSKI CERT JE VALIDAN AKO JE IZDAT U PRETHODNIH MESEC DANA
+            DateTime datum = DateTime.Now;
+            int mesec = datum.Month;
+
+            DateTime datum2;
+            if (mesec != 1)
+            {
+                if (mesec == 3 && datum.Day > 28)
+                {
+                    if (datum.Year % 4 == 0)
+                        datum2 = new DateTime(datum.Year, mesec - 1, 29);
+                    else
+                        datum2 = new DateTime(datum.Year, mesec - 1, 28);
+                }
+                else if ((mesec == 5 || mesec == 7 || mesec == 10 || mesec == 12) && datum.Day == 31)
+                    datum2 = new DateTime(datum.Year, mesec - 1, 30);
+                else
+                    datum2 = new DateTime(datum.Year, mesec - 1, datum.Day);
+            }
+            else
+            {
+                datum2 = new DateTime(datum.Year - 1, 12, datum.Day);
+            }
+
+            if (certificate.NotBefore < datum2)
+            {
+                throw new Exception("Certificate is not valid. (Too old)");
+            }
+
             // dobavljamo sertifikat servisa iz storage a
             X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine,
                 Formatter.ParseName(WindowsIdentity.GetCurrent().Name));
