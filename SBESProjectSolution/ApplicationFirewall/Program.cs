@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,16 +37,51 @@ namespace ApplicationFirewall
 
             Console.WriteLine("Korisnik koji je pokrenuo ApplicationFirewall: " + WindowsIdentity.GetCurrent().Name);
 
-            Thread thr = new Thread(ConsumerProcess);
-            thr.Start();
+            #region ConsumerProcess
+
+            NetTcpBinding binding2 = new NetTcpBinding();
+            binding2.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
+
+            // iscitava se server iz trusted people
+            EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://localhost:7777/SyslogServerSecurityEvent"),
+                                      new X509CertificateEndpointIdentity(srvCert));
+
+            using (afccProxy = new AFCCProxy(binding2, address2))
+            {
+
+                NetTcpBinding binding3 = new NetTcpBinding();
+                string address3 = "net.tcp://localhost:5555/ClientService";
+
+                binding3.Security.Mode = SecurityMode.Transport;
+                binding3.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
+                binding3.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
+
+                ServiceHost serviceHost = new ServiceHost(typeof(ClientService));
+                serviceHost.AddServiceEndpoint(typeof(IClientService), binding3, address3);
+
+                serviceHost.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
+                serviceHost.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
+
+                ServiceSecurityAuditBehavior newAudit = new ServiceSecurityAuditBehavior();
+                newAudit.AuditLogLocation = AuditLogLocation.Application;
+                newAudit.ServiceAuthorizationAuditLevel = AuditLevel.SuccessOrFailure;
+
+                serviceHost.Description.Behaviors.Remove<ServiceSecurityAuditBehavior>();
+                serviceHost.Description.Behaviors.Add(newAudit);
+
+
+                serviceHost.Open();
+
+                Console.WriteLine("ClientProcess is working.");
+            }
+            #endregion
 
             WhitelistConfig wc = new WhitelistConfig();
             Event ev;
 
-            while (true)
+            using (AFProxy proxy = new AFProxy(binding, address))
             {
-                
-                using (AFProxy proxy = new AFProxy(binding, address))
+                while(true)
                 {
                     Thread.Sleep(100);
                     Console.WriteLine("Choose an option:");
@@ -102,44 +138,6 @@ namespace ApplicationFirewall
                     }
                 }
             }
-        }
-
-        static void ConsumerProcess()
-        {
-            Thread.Sleep(100);
-
-            /// Define the expected service certificate. It is required to establish cmmunication using certificates.
-			string srvCertCN = "wcfservice";
-
-            NetTcpBinding binding = new NetTcpBinding();
-            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
-
-            // Moramo da znamo gde se koji sertifikat instalira !
-
-            /// Use CertManager class to obtain the certificate based on the "srvCertCN" representing the expected service identity.
-            X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.TrustedPeople, StoreLocation.LocalMachine, srvCertCN);
-            // iscitava se server iz trusted people
-            EndpointAddress address = new EndpointAddress(new Uri("net.tcp://localhost:7777/SyslogServerSecurityEvent"),
-                                      new X509CertificateEndpointIdentity(srvCert));
-
-            using (afccProxy = new AFCCProxy(binding, address))
-            {
-
-                NetTcpBinding binding2 = new NetTcpBinding();
-                string address2 = "net.tcp://localhost:5555/ClientService";
-
-                binding2.Security.Mode = SecurityMode.Transport;
-                binding2.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
-                binding2.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
-
-                ServiceHost serviceHost = new ServiceHost(typeof(ClientService));
-                serviceHost.AddServiceEndpoint(typeof(IClientService), binding2, address2);
-                serviceHost.Open();
-
-                Console.WriteLine("ClientProcess is working.");
-            }
-
-            Console.ReadLine();
         }
     }
 }

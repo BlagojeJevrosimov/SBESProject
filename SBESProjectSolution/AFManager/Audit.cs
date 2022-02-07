@@ -11,7 +11,7 @@ namespace AFManager
     {
         private static EventLog customLog = null;           // u konstruktoru kreiramo objekat
         const string SourceName = "AFManager.Audit";
-        const string LogName = "MySecTest2";       // mozemo bilo koji naziv
+        const string LogName = "AFSecTest";       // mozemo bilo koji naziv
 
         static Audit()
         {

@@ -39,6 +39,13 @@ namespace SyslogServer
             hostAF.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
             // izvlacimo iz serverske app (My)
 
+            ServiceSecurityAuditBehavior newAudit = new ServiceSecurityAuditBehavior();
+            newAudit.AuditLogLocation = AuditLogLocation.Application;
+            newAudit.ServiceAuthorizationAuditLevel = AuditLevel.SuccessOrFailure;
+
+            hostAF.Description.Behaviors.Remove<ServiceSecurityAuditBehavior>();
+            hostAF.Description.Behaviors.Add(newAudit);
+
             try
             {
                 hostAF.Open();
@@ -49,7 +56,7 @@ namespace SyslogServer
                 Console.WriteLine("[StackTrace] {0}", e.StackTrace);
             }
 
-            Console.WriteLine("Server je ostvario komunikaciju sa AF.");
+            Console.WriteLine("AF process is working.");
 
             #endregion
 
@@ -74,6 +81,13 @@ namespace SyslogServer
             hostAFCC.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
             // izvlacimo iz serverske app (My)
 
+            ServiceSecurityAuditBehavior newAudit2 = new ServiceSecurityAuditBehavior();
+            newAudit2.AuditLogLocation = AuditLogLocation.Application;
+            newAudit2.ServiceAuthorizationAuditLevel = AuditLevel.SuccessOrFailure;
+
+            hostAFCC.Description.Behaviors.Remove<ServiceSecurityAuditBehavior>();
+            hostAFCC.Description.Behaviors.Add(newAudit2);
+
             try
             {
                 hostAFCC.Open();
@@ -83,6 +97,8 @@ namespace SyslogServer
                 Console.WriteLine("[ERROR] {0}", e.Message);
                 Console.WriteLine("[StackTrace] {0}", e.StackTrace);
             }
+
+            Console.WriteLine("AFCC process is working.");
 
             #endregion
 
@@ -108,15 +124,15 @@ namespace SyslogServer
             policies.Add(new CustomAuthorizationPolicy());
             host.Authorization.ExternalAuthorizationPolicies = policies.AsReadOnly();
 
-            ServiceSecurityAuditBehavior newAudit = new ServiceSecurityAuditBehavior();
-            newAudit.AuditLogLocation = AuditLogLocation.Application;
-            newAudit.ServiceAuthorizationAuditLevel = AuditLevel.SuccessOrFailure;
+            ServiceSecurityAuditBehavior newAudit3 = new ServiceSecurityAuditBehavior();
+            newAudit3.AuditLogLocation = AuditLogLocation.Application;
+            newAudit3.ServiceAuthorizationAuditLevel = AuditLevel.SuccessOrFailure;
 
             host.Description.Behaviors.Remove<ServiceSecurityAuditBehavior>();
-            host.Description.Behaviors.Add(newAudit);
+            host.Description.Behaviors.Add(newAudit3);
 
             host.Open();
-            Console.WriteLine("WCFService to Consumer is opened.\n");
+            Console.WriteLine("Consumer Client process is working.\n");
 
             #endregion
 

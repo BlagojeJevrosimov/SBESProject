@@ -31,8 +31,7 @@ namespace ConsumerClient
             string protocol = "";
             string port = "";
 
-            WindowsIdentity windowsIdentity = Thread.CurrentPrincipal.Identity as WindowsIdentity;
-            Consumer c = new Consumer(windowsIdentity.Name, windowsIdentity.User.ToString());
+            Consumer c = new Consumer("wcfclient", "wcfclientID");
 
             while (true)
             {
@@ -69,7 +68,6 @@ namespace ConsumerClient
 
                 while (true)
                 {
-                    Console.Clear();
                     PrintMenu();
                     string x = Console.ReadLine();
 
