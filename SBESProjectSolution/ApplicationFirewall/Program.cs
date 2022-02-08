@@ -19,45 +19,34 @@ namespace ApplicationFirewall
 
         static void Main(string[] args)
         {
-
-            /// Define the expected service certificate. It is required to establish cmmunication using certificates.
             string srvCertCN = "wcfservice";
 
-
-            NetTcpBinding binding = new NetTcpBinding();
-            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
-
             // Moramo da znamo gde se koji sertifikat instalira !
-
             /// Use CertManager class to obtain the certificate based on the "srvCertCN" representing the expected service identity.
             X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.TrustedPeople, StoreLocation.LocalMachine, srvCertCN);
-            // iscitava se server iz trusted people
-            EndpointAddress address = new EndpointAddress(new Uri("net.tcp://localhost:8888/SyslogServerSecurityEvent"),
-                                      new X509CertificateEndpointIdentity(srvCert));
-
-            Console.WriteLine("Korisnik koji je pokrenuo ApplicationFirewall: " + WindowsIdentity.GetCurrent().Name);
 
             #region ConsumerProcess
 
-            NetTcpBinding binding2 = new NetTcpBinding();
-            binding2.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
+            NetTcpBinding bindingAFCC = new NetTcpBinding();
+            bindingAFCC.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
 
             // iscitava se server iz trusted people
-            EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://localhost:7777/SyslogServerSecurityEvent"),
+            EndpointAddress addressAFCC = new EndpointAddress(new Uri("net.tcp://localhost:7777/SyslogServerSecurityEvent"),
                                       new X509CertificateEndpointIdentity(srvCert));
 
-            using (afccProxy = new AFCCProxy(binding2, address2))
+            afccProxy = new AFCCProxy(bindingAFCC, addressAFCC);
+            
             {
 
-                NetTcpBinding binding3 = new NetTcpBinding();
-                string address3 = "net.tcp://localhost:5555/ClientService";
+                NetTcpBinding bindingCC = new NetTcpBinding();
+                string addressCC = "net.tcp://localhost:5555/ClientService";
 
-                binding3.Security.Mode = SecurityMode.Transport;
-                binding3.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
-                binding3.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
+                bindingCC.Security.Mode = SecurityMode.Transport;
+                bindingCC.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
+                bindingCC.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
 
                 ServiceHost serviceHost = new ServiceHost(typeof(ClientService));
-                serviceHost.AddServiceEndpoint(typeof(IClientService), binding3, address3);
+                serviceHost.AddServiceEndpoint(typeof(IClientService), bindingCC, addressCC);
 
                 serviceHost.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
                 serviceHost.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
@@ -76,10 +65,22 @@ namespace ApplicationFirewall
             }
             #endregion
 
+            #region AFSS
+
+            NetTcpBinding bindingSS = new NetTcpBinding();
+            bindingSS.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
+
+            // iscitava se server iz trusted people
+            EndpointAddress addressSS = new EndpointAddress(new Uri("net.tcp://localhost:8888/SyslogServerSecurityEvent"),
+                                      new X509CertificateEndpointIdentity(srvCert));
+
+            Console.WriteLine("Korisnik koji je pokrenuo ApplicationFirewall: " + WindowsIdentity.GetCurrent().Name);
+            #endregion
+
             WhitelistConfig wc = new WhitelistConfig();
             Event ev;
 
-            using (AFProxy proxy = new AFProxy(binding, address))
+            using (AFProxy proxy = new AFProxy(bindingSS, addressSS))
             {
                 while(true)
                 {
