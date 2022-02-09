@@ -12,7 +12,8 @@ namespace SecurityManager
 	{
 		AuthenticationSuccess = 0,
 		AuthorizationSuccess = 1,
-		AuthorizationFailed = 2
+		AuthorizationFailed = 2,
+		EventSuccess = 3
 	}
 	class AuditEvents
     {
@@ -55,6 +56,14 @@ namespace SecurityManager
 			get
 			{
 				return ResourceMgr.GetString(AuditEventTypes.AuthorizationFailed.ToString());
+			}
+		}
+
+		public static string EventSuccess
+		{
+			get
+			{
+				return ResourceMgr.GetString(AuditEventTypes.EventSuccess.ToString());
 			}
 		}
 	}

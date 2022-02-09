@@ -103,8 +103,11 @@ namespace Contracts
 
         public override string ToString()
         {
+            string s = "\n";
+            if (Source != null)
+                s = Source.ToString();
             return string.Format("\tCriticallity: {0}\n\tTimestamp: {1}\n\tSource: {2}\tMessage: {3}\n\tState: {4}",
-                criticallity.ToString(), timestamp.ToString(), Source.ToString(), message, state.ToString());
+                criticallity.ToString(), timestamp.ToString(), s, message, state.ToString());
         }
         /*~Event() {
             Event.key--;

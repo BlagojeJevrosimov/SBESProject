@@ -86,5 +86,14 @@ namespace SecurityManager {
                 return ResourceManager.GetString("AuthorizationSuccess", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ({0}, {1}, {2}, {3}, {4}).
+        /// </summary>
+        internal static string EventSuccess {
+            get {
+                return ResourceManager.GetString("EventSuccess", resourceCulture);
+            }
+        }
     }
 }

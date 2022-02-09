@@ -41,6 +41,9 @@ namespace SyslogServer
             hostAFCC.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
             // izvlacimo iz serverske app (My)
 
+            hostAFCC.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
+            hostAFCC.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
+
             ServiceSecurityAuditBehavior newAudit2 = new ServiceSecurityAuditBehavior();
             newAudit2.AuditLogLocation = AuditLogLocation.Application;
             newAudit2.ServiceAuthorizationAuditLevel = AuditLevel.SuccessOrFailure;
@@ -78,6 +81,9 @@ namespace SyslogServer
             // host.Credentials.ServiceCertificate.Certificate
             hostAF.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
             // izvlacimo iz serverske app (My)
+
+            hostAF.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
+            hostAF.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
 
             ServiceSecurityAuditBehavior newAudit = new ServiceSecurityAuditBehavior();
             newAudit.AuditLogLocation = AuditLogLocation.Application;

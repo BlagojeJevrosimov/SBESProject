@@ -126,4 +126,7 @@
   <data name="AuthorizationSuccess" xml:space="preserve">
     <value>User {0} successfully accessed to {1}.</value>
   </data>
+  <data name="EventSuccess" xml:space="preserve">
+    <value>({0}, {1}, {2}, {3}, {4})</value>
+  </data>
 </root>

@@ -25,3 +25,6 @@ C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.csproj.CoreCompileInputs.cache
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.dll
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.pdb
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\bin\x64\Debug\Contracts.dll
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\bin\x64\Debug\Contracts.pdb
+C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.csproj.CopyComplete

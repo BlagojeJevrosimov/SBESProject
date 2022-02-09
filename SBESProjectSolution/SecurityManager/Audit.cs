@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Contracts;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -71,7 +72,7 @@ namespace SecurityManager
         /// <param name="serviceName"> should be read from the OperationContext as follows: OperationContext.Current.IncomingMessageHeaders.Action</param>
         /// <param name="reason">permission name</param>
        public static void AuthorizationFailed(string userName, string serviceName, string reason)
-        {
+       {
             if (customLog != null)
             {
                 string AuthorizationFailed = AuditEvents.AuthorizationFailed;
@@ -82,6 +83,25 @@ namespace SecurityManager
             {
                 throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.",
                     (int)AuditEventTypes.AuthorizationFailed));
+            }
+       }
+
+        public static void EventSuccess(Event ev)
+        {
+            string source = "";
+            if (ev.Source != null)
+                source = ev.Source.ToString();
+            if (customLog != null)
+            {
+                string sendEventSuccess = AuditEvents.EventSuccess;   // preuzimanje poruke
+                string message = String.Format(sendEventSuccess, ev.Criticallity.ToString(), ev.Timestamp.ToString(),
+                    source, ev.Message, ev.State.ToString());
+                customLog.WriteEntry(message);                                          // upisivanje poruke u log
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.",
+                    (int)AuditEventTypes.EventSuccess));
             }
         }
 

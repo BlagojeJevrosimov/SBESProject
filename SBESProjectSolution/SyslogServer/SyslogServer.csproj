@@ -80,7 +80,7 @@
       <Name>Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\SecurityManager\SecurityManager.csproj">
-      <Project>{A8367A4A-48FC-4E73-B23F-6E8B24DAAF5B}</Project>
+      <Project>{a8367a4a-48fc-4e73-b23f-6e8b24daaf5b}</Project>
       <Name>SecurityManager</Name>
     </ProjectReference>
   </ItemGroup>

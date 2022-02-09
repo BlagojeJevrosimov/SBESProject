@@ -10,7 +10,7 @@ namespace SyslogServer
     public class Database
     {
         internal static Dictionary<string, Consumer> subscribers = new Dictionary<string, Consumer>();
-        internal static int eventKey = 0;
+        internal static int eventKey = 3;       // 1 i 2 su iskorisceni u konstruktoru
         internal static Dictionary<int, Event> events = new Dictionary<int, Event>();   // logovi
 
         static Database()

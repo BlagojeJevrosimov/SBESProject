@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using SecurityManager;
 
 namespace SyslogServer
 {
@@ -18,6 +19,19 @@ namespace SyslogServer
             Console.WriteLine("Event successfully added to database.");
             Database.eventKey++;
             m.ReleaseMutex();
+
+            try
+            {
+                Audit.EventSuccess(ev);
+            }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
