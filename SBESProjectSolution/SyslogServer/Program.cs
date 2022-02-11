@@ -21,9 +21,43 @@ namespace SyslogServer
         {
             string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);      // "wcfserver"
 
-            #region AFCC
+            #region ServerAsAClient
 
-            NetTcpBinding bindingAFCC = new NetTcpBinding();
+            string expectedSrvCertCN = "wcfservice"; //ako ne bude moglo da radi sa istim korisnikom onda ovde ide backupwcfservice korisnik 
+            string signCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name) + "_sign";
+
+            NetTcpBinding binding = new NetTcpBinding();
+            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
+
+            X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.TrustedPeople,
+                StoreLocation.LocalMachine, expectedSrvCertCN);
+
+            EndpointAddress address = new EndpointAddress(new Uri("net.tcp://localhost:9988/BackupServer"),
+                                      new X509CertificateEndpointIdentity(srvCert));
+
+            using (ServiceClient proxy = new ServiceClient(binding,address)) 
+            {
+                //test, ide u poseban thread i sleep ce na 5 sekundi ili cak vise i proveravace da li ima nesto u listi pristiglih eventova, ako ima kontaktira backup, salje i tamo se vrsi auditing
+
+                string message = "ManchesterUnited";
+
+                X509Certificate2 certificateSign = CertManager.GetCertificateFromStorage(StoreName.My,
+                    StoreLocation.LocalMachine, signCertCN);
+
+                byte[] signature = DigitalSignature.Create(message, HashAlgorithm.SHA1, certificateSign);
+
+                proxy.BackupLog(message, signature);
+                Console.WriteLine("Backup log executed"); //mozda ubaciti i neki brojac da ispisuje koliko ih je poslato
+
+            }
+
+                #endregion
+
+
+
+                #region AFCC
+
+                NetTcpBinding bindingAFCC = new NetTcpBinding();
             bindingAFCC.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
 
             string addressAFCC = "net.tcp://localhost:7777/SyslogServerSecurityEvent";

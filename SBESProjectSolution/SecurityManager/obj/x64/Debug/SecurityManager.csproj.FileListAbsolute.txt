@@ -28,3 +28,15 @@ C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\bin\x64\Debug\Contracts.dll
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\bin\x64\Debug\Contracts.pdb
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.csproj.CopyComplete
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SecurityManager\bin\x64\Debug\SecurityManager.dll
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SecurityManager\bin\x64\Debug\SecurityManager.pdb
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SecurityManager\bin\x64\Debug\Contracts.dll
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SecurityManager\bin\x64\Debug\Contracts.pdb
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.csprojAssemblyReference.cache
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.AuditEventFile.resources
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.RolesConfigFile.resources
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.csproj.GenerateResource.cache
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.csproj.CoreCompileInputs.cache
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.csproj.CopyComplete
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.dll
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.pdb

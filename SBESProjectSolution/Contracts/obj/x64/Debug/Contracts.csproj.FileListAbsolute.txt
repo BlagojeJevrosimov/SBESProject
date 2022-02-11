@@ -15,3 +15,9 @@ C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\Contracts\obj\x64\D
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\Contracts\obj\x64\Debug\Contracts.dll
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\Contracts\obj\x64\Debug\Contracts.pdb
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\Contracts\obj\x64\Debug\Contracts.csproj.AssemblyReference.cache
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\Contracts\bin\x64\Debug\Contracts.dll
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\Contracts\bin\x64\Debug\Contracts.pdb
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\Contracts\obj\x64\Debug\Contracts.csprojAssemblyReference.cache
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\Contracts\obj\x64\Debug\Contracts.csproj.CoreCompileInputs.cache
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\Contracts\obj\x64\Debug\Contracts.dll
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\Contracts\obj\x64\Debug\Contracts.pdb

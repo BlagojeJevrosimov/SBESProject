@@ -34,3 +34,15 @@ C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SyslogServer\obj\x6
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SyslogServer\obj\x64\Debug\SyslogServer.csproj.CopyComplete
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SyslogServer\obj\x64\Debug\SyslogServer.exe
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SyslogServer\obj\x64\Debug\SyslogServer.pdb
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SyslogServer\bin\x64\Debug\SyslogServer.exe.config
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SyslogServer\bin\x64\Debug\SyslogServer.exe
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SyslogServer\bin\x64\Debug\SyslogServer.pdb
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SyslogServer\bin\x64\Debug\Contracts.dll
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SyslogServer\bin\x64\Debug\SecurityManager.dll
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SyslogServer\bin\x64\Debug\Contracts.pdb
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SyslogServer\bin\x64\Debug\SecurityManager.pdb
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SyslogServer\obj\x64\Debug\SyslogServer.csprojAssemblyReference.cache
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SyslogServer\obj\x64\Debug\SyslogServer.csproj.CoreCompileInputs.cache
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SyslogServer\obj\x64\Debug\SyslogServer.csproj.CopyComplete
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SyslogServer\obj\x64\Debug\SyslogServer.exe
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SyslogServer\obj\x64\Debug\SyslogServer.pdb

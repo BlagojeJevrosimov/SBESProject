@@ -1,0 +1,12 @@
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\BackupServer\bin\x64\Debug\BackupServer.exe.config
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\BackupServer\bin\x64\Debug\BackupServer.exe
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\BackupServer\bin\x64\Debug\BackupServer.pdb
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\BackupServer\bin\x64\Debug\Contracts.dll
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\BackupServer\bin\x64\Debug\SecurityManager.dll
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\BackupServer\bin\x64\Debug\Contracts.pdb
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\BackupServer\bin\x64\Debug\SecurityManager.pdb
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\BackupServer\obj\x64\Debug\BackupServer.csprojAssemblyReference.cache
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\BackupServer\obj\x64\Debug\BackupServer.csproj.CoreCompileInputs.cache
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\BackupServer\obj\x64\Debug\BackupServer.csproj.CopyComplete
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\BackupServer\obj\x64\Debug\BackupServer.exe
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\BackupServer\obj\x64\Debug\BackupServer.pdb

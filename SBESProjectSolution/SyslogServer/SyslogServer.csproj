@@ -68,6 +68,7 @@
     <Compile Include="Database.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceClient.cs" />
     <Compile Include="SyslogServer.cs" />
     <Compile Include="SyslogServerSecurityEvent.cs" />
   </ItemGroup>
