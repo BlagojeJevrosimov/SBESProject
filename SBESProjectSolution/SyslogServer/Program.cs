@@ -183,7 +183,7 @@ namespace SyslogServer
                     Thread.Sleep(5000);
                     if (Database.formatedEvents.Count > 0)
                     {
-                        SyslogServerSecurityEvent.mutex.WaitOne();
+                        SyslogServerSecurityEvent.mutex.WaitOne();//staticki mutex da se resur zakljuca 
                         foreach (string message in Database.formatedEvents)
                         {
                             byte[] signature = DigitalSignature.Create(message, HashAlgorithm.SHA1, certificateSign);

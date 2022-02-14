@@ -6,3 +6,12 @@ C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\AFManager\obj\x64\D
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\AFManager\obj\x64\Debug\AFManager.csproj.CoreCompileInputs.cache
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\AFManager\obj\x64\Debug\AFManager.dll
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\AFManager\obj\x64\Debug\AFManager.pdb
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\AFManager\bin\x64\Debug\AFManager.dll
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\AFManager\bin\x64\Debug\AFManager.pdb
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\AFManager\obj\x64\Debug\AFManager.csprojAssemblyReference.cache
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\AFManager\obj\x64\Debug\AFManager.AuditCCEventFile.resources
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\AFManager\obj\x64\Debug\AFManager.AuditEventFile.resources
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\AFManager\obj\x64\Debug\AFManager.csproj.GenerateResource.cache
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\AFManager\obj\x64\Debug\AFManager.csproj.CoreCompileInputs.cache
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\AFManager\obj\x64\Debug\AFManager.dll
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\AFManager\obj\x64\Debug\AFManager.pdb

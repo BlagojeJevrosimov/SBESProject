@@ -40,3 +40,4 @@ C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.csproj.CopyComplete
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.dll
 C:\Users\AS\Documents\GitHub\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.pdb
+C:\Users\Bozidar\Desktop\SBESProject\SBESProjectSolution\SecurityManager\obj\x64\Debug\SecurityManager.BackupAuditEventFIle.resources

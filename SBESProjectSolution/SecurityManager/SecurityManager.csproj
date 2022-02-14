@@ -69,6 +69,13 @@
       <DependentUpon>AuditEventFile.resx</DependentUpon>
     </Compile>
     <Compile Include="AuditEvents.cs" />
+    <Compile Include="BackupAudit.cs" />
+    <Compile Include="BackupAuditEventFIle.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BackupAuditEventFIle.resx</DependentUpon>
+    </Compile>
+    <Compile Include="BackupAuditEvents.cs" />
     <Compile Include="BothServiceCertValidator.cs" />
     <Compile Include="CertManager.cs" />
     <Compile Include="CustomAuthorizationPolicy.cs" />
@@ -88,6 +95,10 @@
     <EmbeddedResource Include="AuditEventFile.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AuditEventFile.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BackupAuditEventFIle.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BackupAuditEventFIle.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RolesConfigFile.resx">
       <Generator>ResXFileCodeGenerator</Generator>

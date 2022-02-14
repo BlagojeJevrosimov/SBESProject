@@ -24,6 +24,18 @@ namespace BackupServer
             if (DigitalSignature.Verify(message, HashAlgorithm.SHA1, sign, certificate))
             {
                 Console.WriteLine("Sign is valid");
+                try
+                {
+                    BackupAudit.EventSuccess(message);
+                }
+                catch (NullReferenceException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
             else
             {
