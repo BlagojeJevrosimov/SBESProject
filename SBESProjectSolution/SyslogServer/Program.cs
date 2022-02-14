@@ -19,11 +19,11 @@ namespace SyslogServer
     {
         static void Main(string[] args)
         {
-            string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);      // "wcfserver"
+            string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);      // "wcfserviceb"
 
             #region ServerAsAClient
 
-            string expectedSrvCertCN = "wcfservice"; //ako ne bude moglo da radi sa istim korisnikom onda ovde ide backupwcfservice korisnik 
+            string expectedSrvCertCN = "wcfbackup";
             string signCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name) + "_sign";
 
             NetTcpBinding binding = new NetTcpBinding();
@@ -32,7 +32,7 @@ namespace SyslogServer
             X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.TrustedPeople,
                 StoreLocation.LocalMachine, expectedSrvCertCN);
 
-            EndpointAddress address = new EndpointAddress(new Uri("net.tcp://localhost:9988/BackupServer"),
+            EndpointAddress address = new EndpointAddress(new Uri("net.tcp://localhost:9988/BackupService"),
                                       new X509CertificateEndpointIdentity(srvCert));
 
             using (ServiceClient proxy = new ServiceClient(binding,address)) 
@@ -51,11 +51,11 @@ namespace SyslogServer
 
             }
 
-                #endregion
+            #endregion
 
 
 
-                #region AFCC
+            #region AFCC
 
                 NetTcpBinding bindingAFCC = new NetTcpBinding();
             bindingAFCC.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;

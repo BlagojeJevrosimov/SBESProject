@@ -12,7 +12,7 @@ namespace SecurityManager
     {
         public override void Validate(X509Certificate2 certificate)
         {
-            if (!certificate.Issuer.Equals("SYSLOG_CA"))
+            if (!certificate.Issuer.Equals("CN=SYSLOG_CA"))
                 throw new Exception("Certificate isn't issued by SYSLOG_CA");
 
             DateTime threeYears = DateTime.Now;

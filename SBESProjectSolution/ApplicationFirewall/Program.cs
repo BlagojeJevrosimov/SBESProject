@@ -19,7 +19,7 @@ namespace ApplicationFirewall
 
         static void Main(string[] args)
         {
-            string srvCertCN = "wcfservice";
+            string srvCertCN = "wcfserviceb";
 
             // Moramo da znamo gde se koji sertifikat instalira !
             /// Use CertManager class to obtain the certificate based on the "srvCertCN" representing the expected service identity.

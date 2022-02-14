@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,12 +17,18 @@ namespace BackupServer
     {
         static void Main(string[] args)
         {
-            string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);      // "wcfserver"
+            string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);      // "wcfbackup"
 
             NetTcpBinding binding = new NetTcpBinding();
-            string address = "net.tcp://localhost:9988/BackupServer";
+            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
+
+            string address = "net.tcp://localhost:9988/BackupService";
             ServiceHost hostBS = new ServiceHost(typeof(BackupService));
             hostBS.AddServiceEndpoint(typeof(ISyslogServerBackupData), binding, address);
+
+            hostBS.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
+            hostBS.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
+
             ///Custom validation mode enables creation of a custom validator - CustomCertificateValidator
 			hostBS.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
             hostBS.Credentials.ClientCertificate.Authentication.CustomCertificateValidator = new BothServiceCertValidator();

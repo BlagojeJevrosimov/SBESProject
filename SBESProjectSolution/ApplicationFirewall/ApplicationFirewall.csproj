@@ -78,7 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AFManager\AFManager.csproj">
-      <Project>{794EFA93-D131-402F-9B25-D99B003933EE}</Project>
+      <Project>{794efa93-d131-402f-9b25-d99b003933ee}</Project>
       <Name>AFManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\Contracts\Contracts.csproj">

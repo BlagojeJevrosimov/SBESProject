@@ -15,8 +15,8 @@ namespace BackupServer
         public void BackupLog(string message, byte[] sign)
         {
             //kad je u pitanju autentifikacija putem Sertifikata
-            string clienName = Formatter.ParseName(ServiceSecurityContext.Current.PrimaryIdentity.Name); //koristimo javni kljuc od Servisa jer smo se potpisali uz pomoc privatnog
-            string clientNameSign = clienName + "_sign"; //wcfservice_sign
+            string clientName = "wcfserviceb";      // nije htelo onako kao na vezbama, morala sam zakucati
+            string clientNameSign = clientName + "_sign"; // wcfserviceb_sign
             X509Certificate2 certificate = CertManager.GetCertificateFromStorage(StoreName.TrustedPeople,
                 StoreLocation.LocalMachine, clientNameSign);
 

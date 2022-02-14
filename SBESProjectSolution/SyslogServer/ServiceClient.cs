@@ -21,7 +21,6 @@ namespace SyslogServer
 		{
 			/// cltCertCN.SubjectName should be set to the client's username. .NET WindowsIdentity class provides information about Windows user running the given process
 			string cltCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name); //ovde ce zaprav ovaj servis imati ulogu klijenta
-			//zamisao je da se pali Server i BackupServer sa istim korisnikom wcfservice pa da bude isti sertifikat u upotrebi, ako te ne uspe novi korisnik
 
 			this.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
 			this.Credentials.ServiceCertificate.Authentication.CustomCertificateValidator = new BothServiceCertValidator();
