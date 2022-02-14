@@ -17,6 +17,7 @@ namespace SyslogServer
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
             string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);      // "wcfserviceb"
@@ -35,21 +36,12 @@ namespace SyslogServer
             EndpointAddress address = new EndpointAddress(new Uri("net.tcp://localhost:9988/BackupService"),
                                       new X509CertificateEndpointIdentity(srvCert));
 
-            using (ServiceClient proxy = new ServiceClient(binding,address)) 
-            {
-                //test, ide u poseban thread i sleep ce na 5 sekundi ili cak vise i proveravace da li ima nesto u listi pristiglih eventova, ako ima kontaktira backup, salje i tamo se vrsi auditing
-
-                string message = "ManchesterUnited";
-
-                X509Certificate2 certificateSign = CertManager.GetCertificateFromStorage(StoreName.My,
+            X509Certificate2 certificateSign = CertManager.GetCertificateFromStorage(StoreName.My,
                     StoreLocation.LocalMachine, signCertCN);
 
-                byte[] signature = DigitalSignature.Create(message, HashAlgorithm.SHA1, certificateSign);
+            var t = new Thread(() => BackupLogOperation(binding, address, certificateSign));
+            t.Start();
 
-                proxy.BackupLog(message, signature);
-                Console.WriteLine("Backup log executed"); //mozda ubaciti i neki brojac da ispisuje koliko ih je poslato
-
-            }
 
             #endregion
 
@@ -178,6 +170,34 @@ namespace SyslogServer
             host.Close();
             hostAF.Close();
             hostAFCC.Close();
+        }
+
+        public static void BackupLogOperation(NetTcpBinding binding, EndpointAddress address, X509Certificate2 certificateSign)
+        {
+            using (ServiceClient proxy = new ServiceClient(binding, address))
+            {
+                //proveravace da li ima nesto u listi pristiglih eventova, ako ima kontaktira backup, salje i tamo se vrsi auditing
+                while (true)
+                {
+                    
+                    Thread.Sleep(5000);
+                    if (Database.formatedEvents.Count > 0)
+                    {
+                        SyslogServerSecurityEvent.mutex.WaitOne();
+                        foreach (string message in Database.formatedEvents)
+                        {
+                            byte[] signature = DigitalSignature.Create(message, HashAlgorithm.SHA1, certificateSign);
+
+                            proxy.BackupLog(message, signature);
+                            Console.WriteLine("Backup log executed");
+                        }
+
+                        Database.formatedEvents.Clear();
+                        SyslogServerSecurityEvent.mutex.ReleaseMutex();
+
+                    }
+                }
+            }
         }
     }
 }

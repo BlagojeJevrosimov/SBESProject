@@ -11,14 +11,22 @@ namespace SyslogServer
 {
     public class SyslogServerSecurityEvent : ISyslogServerSecurityEvent
     {
-        public Mutex m = new Mutex();
+        public static Mutex mutex = new Mutex();
         public void sendEvent(Event ev)
         {
-            m.WaitOne();
+            mutex.WaitOne();
+            
             Database.events[Database.eventKey] = ev;
             Console.WriteLine("Event successfully added to database.");
             Database.eventKey++;
-            m.ReleaseMutex();
+
+            string source = "";
+            if (ev.Source != null)
+                source = ev.Source.ToString();
+            string message = String.Format(ev.Criticallity.ToString(), ev.Timestamp.ToString(), source, ev.Message, ev.State.ToString());
+            Database.formatedEvents.Add(message);
+
+            mutex.ReleaseMutex();
 
             try
             {

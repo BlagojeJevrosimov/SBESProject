@@ -12,6 +12,7 @@ namespace SyslogServer
         internal static Dictionary<string, Consumer> subscribers = new Dictionary<string, Consumer>();
         internal static int eventKey = 3;       // 1 i 2 su iskorisceni u konstruktoru
         internal static Dictionary<int, Event> events = new Dictionary<int, Event>();   // logovi
+        internal static List<string> formatedEvents = new List<string>(); //pristigli eventovi se cuvaju pre nego sto se posalju na backup
 
         static Database()
         {
