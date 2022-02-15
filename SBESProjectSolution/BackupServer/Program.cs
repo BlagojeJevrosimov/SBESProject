@@ -17,6 +17,7 @@ namespace BackupServer
     {
         static void Main(string[] args)
         {
+            Console.ReadLine();
             string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);      // "wcfbackup"
 
             NetTcpBinding binding = new NetTcpBinding();
@@ -36,9 +37,6 @@ namespace BackupServer
 			hostBS.Credentials.ClientCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
             hostBS.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
             //SERVERSKI SERTIFIKAT TREBA DA BUDE IZDAT OD STRANE SYSLOG_CA A POSTO ZA AF TREBA DA BUDE ISTI KAO I SERVERSKI ONDA BI I ON TREBA OD NJEGA DA BUDE IZDAT
-
-            hostBS.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
-            hostBS.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
 
             ServiceSecurityAuditBehavior newAudit = new ServiceSecurityAuditBehavior();
             newAudit.AuditLogLocation = AuditLogLocation.Application;

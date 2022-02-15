@@ -28,6 +28,7 @@ namespace BackupServer
                 try
                 {
                     BackupAudit.EventSuccess(message);
+                    Console.WriteLine("BackupLog executed.");
                 }
                 catch (NullReferenceException ex)
                 {
