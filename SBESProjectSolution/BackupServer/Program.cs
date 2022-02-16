@@ -17,7 +17,6 @@ namespace BackupServer
     {
         static void Main(string[] args)
         {
-            Console.ReadLine();
             string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);      // "wcfbackup"
 
             NetTcpBinding binding = new NetTcpBinding();
@@ -32,7 +31,7 @@ namespace BackupServer
 
             ///Custom validation mode enables creation of a custom validator - CustomCertificateValidator
 			hostBS.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
-            hostBS.Credentials.ClientCertificate.Authentication.CustomCertificateValidator = new BothServiceCertValidator();
+            hostBS.Credentials.ClientCertificate.Authentication.CustomCertificateValidator = new BackupCertValidator();
             ///If CA doesn't have a CRL associated, WCF blocks every client because it cannot be validated
 			hostBS.Credentials.ClientCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
             hostBS.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SecurityManager
 {
-    public class BothServiceCertValidator : X509CertificateValidator
+    public class SyslogCertValidator : X509CertificateValidator
     {
         public override void Validate(X509Certificate2 certificate)
         {

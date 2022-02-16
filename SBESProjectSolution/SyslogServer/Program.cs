@@ -17,13 +17,30 @@ namespace SyslogServer
 {
     class Program
     {
-        
+        public static ServiceClient proxyBS;
+        public static X509Certificate2 certificateSign;
+
         static void Main(string[] args)
         {
             string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);      // "wcfserviceb"
 
-            var t = new Thread(() => BackupLogOperation());
-            t.Start();
+            string expectedSrvCertCN = "wcfbackup";
+            string signCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name) + "_sign";
+
+            X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.TrustedPeople,
+                StoreLocation.LocalMachine, expectedSrvCertCN);
+
+            certificateSign = CertManager.GetCertificateFromStorage(StoreName.My,
+                    StoreLocation.LocalMachine, signCertCN);
+
+            NetTcpBinding binding = new NetTcpBinding();
+            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
+
+            EndpointAddress address = new EndpointAddress(new Uri("net.tcp://localhost:9988/BackupService"),
+                                      new X509CertificateEndpointIdentity(srvCert));
+
+            proxyBS = new ServiceClient(binding, address);
+
 
             #region AFCC
 
@@ -150,47 +167,6 @@ namespace SyslogServer
             hostAFCC.Close();
         }
 
-        public static void BackupLogOperation()
-        {
-            Console.ReadLine();
-            string expectedSrvCertCN = "wcfbackup";
-            string signCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name) + "_sign";
-            
-            X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.TrustedPeople,
-                StoreLocation.LocalMachine, expectedSrvCertCN);
-
-            X509Certificate2 certificateSign = CertManager.GetCertificateFromStorage(StoreName.My,
-                    StoreLocation.LocalMachine, signCertCN);
-
-            NetTcpBinding binding = new NetTcpBinding();
-            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
-
-            EndpointAddress address = new EndpointAddress(new Uri("net.tcp://localhost:9988/BackupService"),
-                                      new X509CertificateEndpointIdentity(srvCert));
-
-            using (ServiceClient proxy = new ServiceClient(binding, address))
-            {
-                //proveravace da li ima nesto u listi pristiglih eventova, ako ima kontaktira backup, salje i tamo se vrsi auditing
-                while (true)
-                {
-                    if (Database.formatedEvents.Count > 0)
-                    {
-                        SyslogServerSecurityEvent.mutex.WaitOne();//staticki mutex da se resur zakljuca 
-                        foreach (string message in Database.formatedEvents)
-                        {
-                            byte[] signature = DigitalSignature.Create(message, HashAlgorithm.SHA1, certificateSign);
-
-                            proxy.BackupLog(message, signature);
-                        }
-
-                        Database.formatedEvents.Clear();
-                        SyslogServerSecurityEvent.mutex.ReleaseMutex();
-
-                    }
-                    Thread.Sleep(5000);
-                }
-            }
-
-        }
+       
     }
 }

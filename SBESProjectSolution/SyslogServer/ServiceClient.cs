@@ -23,7 +23,7 @@ namespace SyslogServer
 			string cltCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name); //ovde ce zaprav ovaj servis imati ulogu klijenta
 
 			this.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
-			this.Credentials.ServiceCertificate.Authentication.CustomCertificateValidator = new BothServiceCertValidator();
+			this.Credentials.ServiceCertificate.Authentication.CustomCertificateValidator = new SyslogCertValidator();
 			this.Credentials.ServiceCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
 
 			/// Set appropriate client's certificate on the channel. Use CertManager class to obtain the certificate based on the "cltCertCN"

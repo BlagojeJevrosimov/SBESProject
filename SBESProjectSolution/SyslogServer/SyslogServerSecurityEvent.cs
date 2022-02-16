@@ -31,6 +31,8 @@ namespace SyslogServer
             try
             {
                 Audit.EventSuccess(ev);
+                byte[] signature = DigitalSignature.Create(message, HashAlgorithm.SHA1, Program.certificateSign);
+                Program.proxyBS.BackupLog(message, signature);
             }
             catch (NullReferenceException ex)
             {
