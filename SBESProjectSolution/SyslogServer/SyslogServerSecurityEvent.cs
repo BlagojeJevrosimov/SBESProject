@@ -28,9 +28,9 @@ namespace SyslogServer
 
 
             //TO DO: zakomentarisati liniju gde dodaje u formatedEvents
-            Program.sharedMutex.WaitOne();
-            Database.formatedEvents.Add(message);
-            Program.sharedMutex.ReleaseMutex();
+            //Program.sharedMutex.WaitOne();
+            //Database.formatedEvents.Add(message);
+            //Program.sharedMutex.ReleaseMutex();
 
 
 
