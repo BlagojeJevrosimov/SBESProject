@@ -24,6 +24,7 @@ namespace Contracts
 
         public Event( CriticallityLevel criticallity, DateTime timestamp, Consumer source, string message, MessageState state)
         {
+            this.criticallity = criticallity;
             this.timestamp = timestamp;
             this.source = source;
             this.message = message;

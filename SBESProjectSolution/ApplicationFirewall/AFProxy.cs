@@ -22,8 +22,8 @@ namespace ApplicationFirewall
             //cltCertCN = cltCertCN.ToLower();
 
             ///Custom validation mode enables creation of a custom validator - CustomCertificateValidator
-            this.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.Custom;
-            this.Credentials.ServiceCertificate.Authentication.CustomCertificateValidator = new ClientCertValidator();
+            this.Credentials.ServiceCertificate.Authentication.CertificateValidationMode 
+                = System.ServiceModel.Security.X509CertificateValidationMode.ChainTrust;
 
             this.Credentials.ServiceCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
 
