@@ -33,7 +33,7 @@ namespace ApplicationFirewall
             if (!validPorts.Contains(port))
             {
                 validPorts.Add(port);
-                Consumer c = new Consumer(WindowsIdentity.GetCurrent().Name, WindowsIdentity.GetCurrent().User.ToString());
+                Consumer c = new Consumer(Formatter.ParseName(WindowsIdentity.GetCurrent().Name), WindowsIdentity.GetCurrent().User.ToString());
                 ev = new Event(CriticallityLevel.GREEN_ALERT, DateTime.Now, c, "AddPort" + port.ToString(), MessageState.OPEN);
 
                 try
@@ -59,7 +59,7 @@ namespace ApplicationFirewall
             if (validPorts.Contains(port))
             {
                 validPorts.Remove(port);
-                Consumer c = new Consumer(WindowsIdentity.GetCurrent().Name, WindowsIdentity.GetCurrent().User.ToString());
+                Consumer c = new Consumer(Formatter.ParseName(WindowsIdentity.GetCurrent().Name), WindowsIdentity.GetCurrent().User.ToString());
                 ev = new Event(CriticallityLevel.YELLOW_ALERT, DateTime.Now, c, "RemovePort" + port.ToString(), MessageState.CLOSE);
 
                 try
@@ -87,7 +87,7 @@ namespace ApplicationFirewall
             if (!validProtocols.Contains(protocol))
             {
                 validProtocols.Add(protocol);
-                Consumer c = new Consumer(WindowsIdentity.GetCurrent().Name, WindowsIdentity.GetCurrent().User.ToString());
+                Consumer c = new Consumer(Formatter.ParseName(WindowsIdentity.GetCurrent().Name), WindowsIdentity.GetCurrent().User.ToString());
                 ev = new Event(CriticallityLevel.GREEN_ALERT, DateTime.Now, c, "AddProtocol" + protocol, MessageState.OPEN);
 
                 try
@@ -115,7 +115,7 @@ namespace ApplicationFirewall
             if (validProtocols.Contains(protocol))
             {
                 validProtocols.Remove(protocol);
-                Consumer c = new Consumer(WindowsIdentity.GetCurrent().Name, WindowsIdentity.GetCurrent().User.ToString());
+                Consumer c = new Consumer(Formatter.ParseName(WindowsIdentity.GetCurrent().Name), WindowsIdentity.GetCurrent().User.ToString());
                 ev = new Event(CriticallityLevel.RED_ALERT, DateTime.Now, c, "RemoveProtocol" + protocol, MessageState.CLOSE);
 
                 try
