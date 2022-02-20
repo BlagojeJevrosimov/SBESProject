@@ -47,6 +47,18 @@ namespace SyslogServer
 			}
 		}
 
+		public void TestCommunication()
+		{
+			try
+			{
+				factory.TestCommunication();
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("[BackupLog] Didn't execute Test Communication. Error = {0}", e.Message);
+			}
+		}
+
 		public void Dispose()
 		{
 			if (factory != null)

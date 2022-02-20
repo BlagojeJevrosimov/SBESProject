@@ -17,8 +17,9 @@ namespace SyslogServer
 {
     class Program
     {
-        public static ServiceClient proxyBS;
-        public static X509Certificate2 certificateSign;
+        //public static ServiceClient proxyBS;
+        //public static X509Certificate2 certificateSign;
+        public static Mutex sharedMutex = new Mutex();
 
         static void Main(string[] args)
         {
@@ -30,7 +31,7 @@ namespace SyslogServer
             X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.TrustedPeople,
                 StoreLocation.LocalMachine, expectedSrvCertCN);
 
-            certificateSign = CertManager.GetCertificateFromStorage(StoreName.My,
+            X509Certificate2 certificateSign = CertManager.GetCertificateFromStorage(StoreName.My,
                     StoreLocation.LocalMachine, signCertCN);
 
             NetTcpBinding binding = new NetTcpBinding();
@@ -39,7 +40,25 @@ namespace SyslogServer
             EndpointAddress address = new EndpointAddress(new Uri("net.tcp://localhost:9988/BackupService"),
                                       new X509CertificateEndpointIdentity(srvCert));
 
-            proxyBS = new ServiceClient(binding, address);
+            //TO DO: prvo pokretanje zakomentarisati thread eventSimulator, da bi pokusali da pozovemo proxy posle ApplicationFirewalla
+            //sledi komentarisanje dela gde se puni lista eventova da nam se proxy od backupa nikad ne pozove da ne bi dolazilo do pucanja konekcije
+            //nakon toga otkomentarisati trehad da bi nam simuliralo eventove koji bi pristizali da bi pokazali funkcionisanje backup servera
+
+
+            //var eventSimulator = new Thread(EventSimulation); //thread koji simulira da su pristigli eventi 
+            //eventSimulator.Start();
+
+            //koristicemo zajednicki mutex u ovim threadovima jer bi koristili mutex da obezbedimo pristizanje pravih eventova u bazi i slanje
+
+            var t = new Thread(() => BackupLogOperation(binding, address, certificateSign));
+            t.Start();
+
+            //TO DO: otkomentarisati za socket error na application firewallu
+
+            /*using (ServiceClient proxy = new ServiceClient(binding, address))
+            {
+                proxy.TestCommunication(); //u ovom slucaju nece vise raditi komunikacija ka application firewallu (znaci ako se prvo pozove proxy ka backup onda socket error baca tamo)
+            }*/
 
 
             #region AFCC
@@ -167,6 +186,57 @@ namespace SyslogServer
             hostAFCC.Close();
         }
 
-       
+        public static void BackupLogOperation(NetTcpBinding binding, EndpointAddress address, X509Certificate2 certificateSign)
+        {
+            Console.WriteLine("Client thread processing...");
+            using (ServiceClient proxy = new ServiceClient(binding, address))
+            {
+                //proveravace da li ima nesto u listi pristiglih eventova, ako ima kontaktira backup, salje i tamo se vrsi auditing
+
+                while (true)
+                {
+
+                    Thread.Sleep(5000);
+                    if (Database.formatedEvents.Count > 0)
+                    {
+                        sharedMutex.WaitOne();
+                        List<string> formatedList = new List<string>(Database.formatedEvents);
+                        //Console.WriteLine("Thread za slanje, broj elemenata,{0}",Database.formatedEvents.Count);
+                        Database.formatedEvents.Clear();
+                        Console.WriteLine("Thread za slanje, broj elemenata,{0}", formatedList.Count);
+                        sharedMutex.ReleaseMutex();
+
+                        foreach (string message in formatedList)
+                        {
+                            byte[] signature = DigitalSignature.Create(message, HashAlgorithm.SHA1, certificateSign);
+
+                            proxy.BackupLog(message, signature);
+                            //Console.WriteLine("Backup log executed");
+                        }
+                    }
+                }
+            }
+        }
+
+
+        public static void EventSimulation()
+        {
+            Random rand = new Random();
+
+            while (true)
+            {
+                Thread.Sleep(1500);
+                int num = rand.Next(0, 78);
+                Event ev = new Event(CriticallityLevel.GREEN_ALERT, DateTime.Now, new Consumer(String.Format("user:{0}", num), String.Format("id:{0}", num)), String.Format("Poruka:{0}", num), MessageState.OPEN);
+                string message = String.Format("{0}, {1}, {2}, {3}, {4}", ev.Criticallity.ToString(), ev.Timestamp.ToString(), ev.Source.ToString(), ev.Message, ev.State.ToString());
+
+                sharedMutex.WaitOne();
+                //Console.WriteLine("Thread za kreiranje");
+                Database.formatedEvents.Add(message);
+                sharedMutex.ReleaseMutex();
+            }
+        }
+
+
     }
 }

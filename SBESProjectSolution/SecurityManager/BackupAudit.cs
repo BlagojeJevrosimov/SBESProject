@@ -35,9 +35,11 @@ namespace SecurityManager
 
             if (customLog != null)
             {
-                string sendEventSuccess = BackupAuditEvents.EventSuccess;   // preuzimanje poruke
-                string message = String.Format(sendEventSuccess, formatedEv);
-                customLog.WriteEntry(message);                                          // upisivanje poruke u log
+                //string sendEventSuccess = BackupAuditEvents.EventSuccess;   // preuzimanje poruke
+                //string message = String.Format(sendEventSuccess, formatedEv);
+
+                //nema potrebe za onim gore jer vec preuzimamo formatiranu poruku
+                customLog.WriteEntry(formatedEv);                                          // upisivanje poruke u log
             }
             else
             {

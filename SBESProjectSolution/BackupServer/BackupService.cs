@@ -45,5 +45,10 @@ namespace BackupServer
             }
 
         }
+
+        public void TestCommunication()
+        {
+            Console.WriteLine("Test komunikacija izvrsena");
+        }
     }
 }

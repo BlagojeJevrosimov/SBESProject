@@ -12,5 +12,7 @@ namespace Contracts
     {
         [OperationContract]
         void BackupLog(string message, byte[] sign);
+        [OperationContract]
+        void TestCommunication();
     }
 }

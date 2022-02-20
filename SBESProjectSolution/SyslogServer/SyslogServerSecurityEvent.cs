@@ -19,20 +19,25 @@ namespace SyslogServer
             Database.events[Database.eventKey] = ev;
             Console.WriteLine("Event successfully added to database.");
             Database.eventKey++;
+            mutex.ReleaseMutex();
 
             string source = "";
             if (ev.Source != null)
                 source = ev.Source.ToString();
-            string message = String.Format(ev.Criticallity.ToString(), ev.Timestamp.ToString(), source, ev.Message, ev.State.ToString());
-            Database.formatedEvents.Add(message);
+            string message = String.Format("{0}, {1}, {2}, {3}, {4}", ev.Criticallity.ToString(), ev.Timestamp.ToString(), source, ev.Message, ev.State.ToString());
 
-            mutex.ReleaseMutex();
+
+            //TO DO: zakomentarisati liniju gde dodaje u formatedEvents
+            Program.sharedMutex.WaitOne();
+            Database.formatedEvents.Add(message);
+            Program.sharedMutex.ReleaseMutex();
+
+
 
             try
             {
                 Audit.EventSuccess(ev);
-                byte[] signature = DigitalSignature.Create(message, HashAlgorithm.SHA1, Program.certificateSign);
-                Program.proxyBS.BackupLog(message, signature);
+                
             }
             catch (NullReferenceException ex)
             {
